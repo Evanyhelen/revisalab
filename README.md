@@ -5,175 +5,22 @@
      o link da seção "2. Demonstração".
 ============================================================================ -->
 
-<!-- Tema visual do README (aplicado no preview do VS Code; o GitHub ignora este bloco). -->
-<style>
-  body {
-    background: #f0f4ff !important;
-    color: #1a1a2e;
-    font-family: 'Inter', 'Roboto', 'Helvetica Neue', sans-serif;
-    line-height: 1.7;
-  }
 
-  h2 {
-    position: relative !important;
-    font-size: 1.5em !important;
-    font-weight: 800 !important;
-    color: #0f1a5c !important;
-    margin-top: 2.4em !important;
-    padding-bottom: 0.5em !important;
-    border-bottom: 1px solid #e2e8f0 !important;
-  }
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:1a2980,100:26d0ce&height=160&section=header&text=RevisaLab&fontSize=50&fontColor=ffffff"/>
 
-  h2::after {
-    content: "" !important;
-    position: absolute !important;
-    left: 0 !important;
-    bottom: -1px !important;
-    width: 72px !important;
-    height: 3px !important;
-    border-radius: 3px !important;
-    background: linear-gradient(90deg, #1a2980, #26d0ce) !important;
-  }
+<div align="center">
 
-  h3 {
-    font-size: 1.12em !important;
-    font-weight: 650 !important;
-    color: #1a2980 !important;
-    margin-top: 1.8em !important;
-  }
+<p>🎓 Plataforma gamificada para graduandos</p>
 
-  a { color: #1a2980 !important; text-decoration: none !important; }
-  a:hover { color: #26d0ce !important; text-decoration: underline !important; }
-
-  table {
-    border-collapse: separate !important;
-    border-spacing: 0 !important;
-    width: 100% !important;
-    background: #ffffff !important;
-    border: 1px solid #e2e8f0 !important;
-    border-radius: 16px !important;
-    overflow: hidden !important;
-    box-shadow: 0 4px 20px rgba(26, 41, 128, 0.08) !important;
-  }
-
-  th {
-    background: linear-gradient(135deg, #1a2980, #26d0ce) !important;
-    color: #ffffff !important;
-    font-weight: 600 !important;
-    text-align: left !important;
-    padding: 11px 14px !important;
-    border: none !important;
-  }
-
-  td {
-    padding: 10px 14px !important;
-    border-top: 1px solid #e2e8f0 !important;
-    vertical-align: top !important;
-  }
-
-  tbody tr:nth-child(even) { background: #f8faff !important; }
-  tbody tr:hover { background: #eef3ff !important; }
-
-  code {
-    background: #1a2980 !important;
-    color: #ffffff !important;
-    padding: 2px 6px !important;
-    border-radius: 6px !important;
-    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace !important;
-    font-size: 0.92em !important;
-  }
-
-  pre {
-    background: #0f1a5c !important;
-    padding: 16px 18px !important;
-    border-radius: 12px !important;
-    overflow-x: auto !important;
-    border: none !important;
-  }
-
-  pre code {
-    background: transparent !important;
-    color: #dbeafe !important;
-    padding: 0 !important;
-    border-radius: 0 !important;
-    font-size: 0.9em !important;
-  }
-
-  blockquote {
-    border-left: 4px solid #26d0ce !important;
-    background: #eef2ff !important;
-    padding: 12px 18px !important;
-    border-radius: 0 10px 10px 0 !important;
-    color: #1a1a2e !important;
-    margin: 1.2em 0 !important;
-  }
-
-  hr {
-    border: none !important;
-    height: 1px !important;
-    background: linear-gradient(90deg, transparent, #26d0ce, transparent) !important;
-    margin: 2.6em 0 !important;
-  }
-
-  ul, ol { padding-left: 1.5em !important; }
-  li { margin: 0.35em 0 !important; }
-  li::marker { color: #26d0ce !important; }
-
-  .orb {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-  }
-  .orb-1 {
-    width: 500px;
-    height: 500px;
-    top: -150px;
-    right: -100px;
-    background: rgba(255, 255, 255, 0.04);
-    animation: float 8s ease-in-out infinite;
-  }
-  .orb-2 {
-    width: 300px;
-    height: 300px;
-    bottom: -100px;
-    left: 5%;
-    background: rgba(38, 208, 206, 0.08);
-    animation: float 10s ease-in-out infinite reverse;
-  }
-  .orb-3 {
-    width: 200px;
-    height: 200px;
-    top: 30%;
-    right: 25%;
-    background: rgba(245, 166, 35, 0.06);
-    animation: float 12s ease-in-out infinite;
-  }
-  @keyframes float {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(5deg); }
-  }
-</style>
-
-<div align="center" style="position:relative;overflow:hidden;padding:48px 24px;border-radius:24px;background:linear-gradient(135deg,#1a2980 0%,#26d0ce 100%);">
-
-<div class="orb orb-1"></div>
-<div class="orb orb-2"></div>
-<div class="orb orb-3"></div>
-
-<div style="position:relative;z-index:2;">
-<p style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:30px;padding:8px 18px;color:#ffffff;font-size:13px;font-weight:600;margin:0 0 24px;">🎓 Plataforma gamificada para graduandos</p>
-
-<h1 style="color:#ffffff;font-size:2.8em;font-weight:900;letter-spacing:-0.03em;margin:0.1em 0;">📖 RevisaLab</h1>
-
-<p style="font-size:1.15em;color:rgba(255,255,255,0.92);margin:0.4em 0;">
+<p>
   <strong>Plataforma de estudos gamificada</strong> para o nivelamento e a revisão estruturada de conteúdos do ensino médio.
 </p>
 
-<p style="color:rgba(255,255,255,0.75);margin:0;">
+<p>
   <em>Trabalho de Conclusão de Curso (TCC) · Engenharia de Software</em>
 </p>
 
-<p style="margin-top:20px;">
+<p>
   <img src="https://img.shields.io/badge/Java-21-ED8B00?logo=openjdk&logoColor=white" alt="Java 21">
   <img src="https://img.shields.io/badge/Spring%20Boot-3.4.1-6DB33F?logo=springboot&logoColor=white" alt="Spring Boot 3.4.1">
   <img src="https://img.shields.io/badge/Angular-21-DD0031?logo=angular&logoColor=white" alt="Angular 21">
@@ -190,11 +37,11 @@
   <img src="https://img.shields.io/static/v1?label=&message=Trilhas&color=0F1A5C" alt="Trilhas">
 </p>
 
-<p style="margin-bottom:4px;">
+<p>
+  <img src="https://img.shields.io/badge/Vers%C3%A3o-1.0.0-26D0CE" alt="Versão">
   <img src="https://img.shields.io/badge/Status-Prot%C3%B3tipo%20funcional-27ae60" alt="Status">
   <img src="https://img.shields.io/static/v1?label=Licen%C3%A7a&message=Educacional&color=1A2980" alt="Licença educacional">
 </p>
-</div>
 
 </div>
 
@@ -255,11 +102,11 @@ A aplicação segue o paradigma **cliente-servidor** em cinco camadas:
 
 | Camada | Responsabilidade |
 |--------|------------------|
-| <img src="https://api.iconify.design/mdi/monitor.svg?color=%231a2980&width=22" width="22" alt=""> Apresentação | Angular/TypeScript — Home, Dashboard, Trilhas, Praticar (Quiz), Missões, Conquistas, Ranking, Chat IA, Construtor de Base, Fundamentação, Impacto, Sobre e Perfil |
-| <img src="https://api.iconify.design/mdi/brain.svg?color=%231a2980&width=22" width="22" alt=""> Lógica de negócio | Services TypeScript — navegação, gamificação e validações |
-| <img src="https://api.iconify.design/mdi/api.svg?color=%231a2980&width=22" width="22" alt=""> Serviços de integração | Autenticação JWT e gerenciamento de conteúdo |
-| <img src="https://api.iconify.design/mdi/server.svg?color=%231a2980&width=22" width="22" alt=""> Backend | Spring Boot — API REST, Spring Security e integração com APIs externas |
-| <img src="https://api.iconify.design/mdi/database.svg?color=%231a2980&width=22" width="22" alt=""> Persistência | MySQL/H2 — usuários, progresso, pontuação e conquistas |
+| <img src="https://api.iconify.design/mdi/monitor.svg?color=%234A90E2&width=22" width="22" alt=""> Apresentação | Angular/TypeScript — Home, Dashboard, Trilhas, Praticar (Quiz), Missões, Conquistas, Ranking, Chat IA, Construtor de Base, Fundamentação, Impacto, Sobre e Perfil |
+| <img src="https://api.iconify.design/mdi/brain.svg?color=%234A90E2&width=22" width="22" alt=""> Lógica de negócio | Services TypeScript — navegação, gamificação e validações |
+| <img src="https://api.iconify.design/mdi/api.svg?color=%234A90E2&width=22" width="22" alt=""> Serviços de integração | Autenticação JWT e gerenciamento de conteúdo |
+| <img src="https://api.iconify.design/mdi/server.svg?color=%234A90E2&width=22" width="22" alt=""> Backend | Spring Boot — API REST, Spring Security e integração com APIs externas |
+| <img src="https://api.iconify.design/mdi/database.svg?color=%234A90E2&width=22" width="22" alt=""> Persistência | MySQL/H2 — usuários, progresso, pontuação e conquistas |
 
 <p align="center">
   <img src="frontend/imagens/figura-1-arquitetura-camadas.png" alt="Figura 1 – Arquitetura em camadas do sistema RevisaLab" width="640">
@@ -487,3 +334,5 @@ Repositório: _link a ser adicionado após publicação no GitHub._
 ## Licença
 
 Projeto desenvolvido como parte de um **Trabalho de Conclusão de Curso (TCC)** e disponibilizado para **fins educacionais**.
+
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:1a2980,100:26d0ce&height=120&section=footer"/>
