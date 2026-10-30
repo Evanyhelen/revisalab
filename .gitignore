@@ -1,7 +1,0 @@
-/backend/target/
-/backend/data/
-/backend/compile_log.txt
-/backend/.idea/
-/frontend/node_modules/
-/frontend/dist/
-/frontend/.angular/
