@@ -1,0 +1,136 @@
+/* REMOVE ESPAÇAMENTO DO FOOTER E GARANTE QUE FIQUE COLADO */
+app-footer {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  display: block !important;
+  position: relative !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  transform: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  margin-top: -1px !important;
+}
+
+/* REMOVE QUALQUER ESPAÇO ANTES DO FOOTER */
+.main-content ~ app-footer,
+main ~ app-footer,
+router-outlet ~ app-footer,
+.app-footer {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  position: relative !important;
+  top: 0 !important;
+}
+
+/* GARANTE QUE NENHUM ELEMENTO CRIE ESPAÇO ANTES DO FOOTER */
+*:has(+ app-footer) {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* REMOVE QUALQUER ESPAÇO BRANCO ANTES DO FOOTER */
+body > *:last-child::before,
+app-root > *:last-child::before,
+.main-content > *:last-child::before {
+  content: none !important;
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* GARANTIR TEXTO BRANCO NOS INPUTS SOMENTE NO MODO DARK */
+body.dark-mode input,
+body.dark-mode .mat-input-element,
+body.dark-mode .mat-mdc-input-element,
+body.dark-mode input[type="text"],
+body.dark-mode input[type="email"],
+body.dark-mode input[type="password"] {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-weight: 500 !important;
+  caret-color: #ffffff !important;
+  background-color: transparent !important;
+}
+
+/* Override específico para Material Design no modo dark */
+body.dark-mode .mat-mdc-form-field input {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-weight: 500 !important;
+  caret-color: #ffffff !important;
+}
+
+/* GARANTE QUE O FOOTER FIQUE COLADO NO CONTEÚDO ACIMA */
+app-footer::before {
+  content: none !important;
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* REMOVE MARGENS PADRÃO DO BODY */
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* REMOVE QUALQUER BORDA OU SOMBRA DO MAIN CONTENT */
+.main-content {
+  border-bottom: none !important;
+  border-top: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* GARANTE QUE O ÚLTIMO ELEMENTO ANTES DO FOOTER NÃO TENHA MARGEM */
+.main-content > *:last-child,
+main > *:last-child,
+.router-outlet + * > *:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* CORREÇÃO PARA PÁGINAS COM GRADIENTE - REMOVE ESPAÇO BRANCO */
+.auth-page {
+  min-height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.auth-page .main-content {
+  flex: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+/* GARANTE QUE O FOOTER FIQUE COLADO EM PÁGINAS DE AUTENTICAÇÃO */
+.auth-page app-footer {
+  margin-top: auto !important;
+  background: #1e3a5f !important;
+}
+
+/* REMOVE QUALQUER ESPAÇO ENTRE CONTEÚDO E FOOTER */
+.router-outlet + * {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}

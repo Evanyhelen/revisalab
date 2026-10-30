@@ -1,0 +1,157 @@
+<div class="page-with-sidebar">
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.collapsed]="!sidebarOpen">
+    <div class="sidebar-brand">
+      <span class="brand-emoji">📖</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-item" routerLink="/dashboard" routerLinkActive="active" [matTooltip]="sidebarOpen ? '' : 'Início'" matTooltipPosition="right">
+        <mat-icon>grid_view</mat-icon>
+        <span>Início</span>
+      </a>
+      <a class="sidebar-item" routerLink="/trilhas" routerLinkActive="active" [matTooltip]="sidebarOpen ? '' : 'Trilhas'" matTooltipPosition="right">
+        <mat-icon>route</mat-icon>
+        <span>Trilhas</span>
+      </a>
+      <a class="sidebar-item" routerLink="/praticar" routerLinkActive="active" [matTooltip]="sidebarOpen ? '' : 'Praticar'" matTooltipPosition="right">
+        <mat-icon>sports_esports</mat-icon>
+        <span>Praticar</span>
+      </a>
+      <a class="sidebar-item" routerLink="/conquistas" routerLinkActive="active" [matTooltip]="sidebarOpen ? '' : 'Conquistas'" matTooltipPosition="right">
+        <mat-icon>military_tech</mat-icon>
+        <span>Conquistas</span>
+      </a>
+      <a class="sidebar-item" routerLink="/ranking" routerLinkActive="active" [matTooltip]="sidebarOpen ? '' : 'Ranking'" matTooltipPosition="right">
+        <mat-icon>leaderboard</mat-icon>
+        <span>Ranking</span>
+      </a>
+      <a class="sidebar-item" routerLink="/chat" routerLinkActive="active" [matTooltip]="sidebarOpen ? '' : 'Chat IA'" matTooltipPosition="right">
+        <mat-icon>smart_toy</mat-icon>
+        <span>Chat IA</span>
+      </a>
+      <a class="sidebar-item" routerLink="/missoes" routerLinkActive="active" [matTooltip]="sidebarOpen ? '' : 'Missões do Dia'" matTooltipPosition="right">
+        <mat-icon>assignment</mat-icon>
+        <span>Missões do Dia</span>
+      </a>
+      <a class="sidebar-item" routerLink="/construtor-base" routerLinkActive="active" [matTooltip]="sidebarOpen ? '' : 'Construtor de Base'" matTooltipPosition="right">
+        <mat-icon>apartment</mat-icon>
+        <span>Construtor de Base</span>
+      </a>
+      <a class="sidebar-item" routerLink="/fundamentacao" routerLinkActive="active" [matTooltip]="sidebarOpen ? '' : 'Fundamentação'" matTooltipPosition="right">
+        <mat-icon>menu_book</mat-icon>
+        <span>Fundamentação</span>
+      </a>
+      <a class="sidebar-item" routerLink="/impacto" routerLinkActive="active" [matTooltip]="sidebarOpen ? '' : 'Impacto'" matTooltipPosition="right">
+        <mat-icon>insights</mat-icon>
+        <span>Impacto</span>
+      </a>
+      <a class="sidebar-item" routerLink="/sobre" routerLinkActive="active" [matTooltip]="sidebarOpen ? '' : 'Sobre o Projeto'" matTooltipPosition="right">
+        <mat-icon>info</mat-icon>
+        <span>Sobre o Projeto</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button class="sidebar-toggle-btn" (click)="toggleSidebar()" [matTooltip]="sidebarOpen ? '' : 'Expandir'" matTooltipPosition="right">
+        <mat-icon>{{ sidebarOpen ? 'chevron_left' : 'chevron_right' }}</mat-icon>
+        <span>{{ sidebarOpen ? 'Recolher' : 'Expandir' }}</span>
+      </button>
+    </div>
+  </aside>
+  
+<div class="chat-container">
+  <!-- Header Profissional - Aparece sempre no topo -->
+  <div class="chat-header-compact">
+    <div class="header-icon-circle">
+      <mat-icon>smart_toy</mat-icon>
+    </div>
+    <div class="header-content">
+      <h1 class="page-title">Assistente Inteligente RevisaLab</h1>
+      <p class="page-subtitle">
+        <span class="status-dot"></span>
+        Online • Pronto para ajudar
+      </p>
+    </div>
+    <div class="header-actions">
+      <button mat-icon-button aria-label="Nova conversa" (click)="clearChat()" matTooltip="Nova conversa">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- Messages Area -->
+  <div class="messages-area" #messagesContainer>
+    <div class="messages-wrapper">
+      <div *ngFor="let message of messages" 
+           class="message-row"
+           [class.user-row]="message.sender === 'user'"
+           [class.ai-row]="message.sender === 'ai'">
+        
+        <div class="message-bubble" [class.user-bubble]="message.sender === 'user'" [class.ai-bubble]="message.sender === 'ai'">
+          <div class="message-content" [innerHTML]="message.text | formatMessage"></div>
+          <div class="message-time">{{ message.timestamp | date:'HH:mm' }}</div>
+        </div>
+      </div>
+
+      <!-- Typing Indicator -->
+      <div *ngIf="isTyping" class="message-row ai-row">
+        <div class="message-bubble ai-bubble typing-bubble">
+          <div class="typing-indicator">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Suggested Questions -->
+  <div class="suggestions" *ngIf="messages.length === 0">
+    <div class="suggestions-header">
+      <mat-icon>tips_and_updates</mat-icon>
+      <p class="suggestions-title">Sugestões para começar</p>
+    </div>
+    <div class="suggestions-chips">
+      <mat-chip *ngFor="let question of suggestedQuestions" 
+                (click)="useSuggestedQuestion(question)"
+                class="suggestion-chip">
+        <mat-icon class="chip-icon">chat_bubble_outline</mat-icon>
+        {{ question }}
+      </mat-chip>
+    </div>
+  </div>
+
+  <!-- Input Area -->
+  <div class="input-area">
+    <div class="input-wrapper">
+      <mat-form-field appearance="outline" class="message-input">
+        <input 
+          matInput 
+          [(ngModel)]="userInput"
+          (keyup.enter)="sendMessage()"
+          placeholder="Digite sua pergunta..."
+          [disabled]="isTyping"
+        />
+        <mat-icon matPrefix>edit</mat-icon>
+      </mat-form-field>
+      
+      <button 
+        mat-fab 
+        color="primary" 
+        (click)="sendMessage()"
+        [disabled]="!userInput.trim() || isTyping"
+        class="send-button">
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+    <div class="disclaimer">
+      <mat-icon class="disclaimer-icon">info</mat-icon>
+      <p class="disclaimer-text">
+        <strong>Dica:</strong> Seja específico em suas perguntas para respostas mais precisas e personalizadas!
+      </p>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,256 @@
+<div class="page-with-sidebar">
+  <aside class="sidebar" [class.collapsed]="!sidebarOpen">
+    <div class="sidebar-brand">
+      <span class="brand-emoji">📖</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-item" routerLink="/dashboard" routerLinkActive="active">
+        <mat-icon>grid_view</mat-icon>
+        <span>Início</span>
+      </a>
+      <a class="sidebar-item" routerLink="/trilhas" routerLinkActive="active">
+        <mat-icon>route</mat-icon>
+        <span>Trilhas</span>
+      </a>
+      <a class="sidebar-item" routerLink="/praticar" routerLinkActive="active">
+        <mat-icon>sports_esports</mat-icon>
+        <span>Praticar</span>
+      </a>
+      <a class="sidebar-item" routerLink="/conquistas" routerLinkActive="active">
+        <mat-icon>military_tech</mat-icon>
+        <span>Conquistas</span>
+      </a>
+      <a class="sidebar-item" routerLink="/ranking" routerLinkActive="active">
+        <mat-icon>leaderboard</mat-icon>
+        <span>Ranking</span>
+      </a>
+      <a class="sidebar-item" routerLink="/chat" routerLinkActive="active">
+        <mat-icon>smart_toy</mat-icon>
+        <span>Chat IA</span>
+      </a>
+      <a class="sidebar-item" routerLink="/missoes" routerLinkActive="active">
+        <mat-icon>assignment</mat-icon>
+        <span>Missões do Dia</span>
+      </a>
+      <a class="sidebar-item" routerLink="/construtor-base" routerLinkActive="active">
+        <mat-icon>apartment</mat-icon>
+        <span>Construtor de Base</span>
+      </a>
+      <a class="sidebar-item" routerLink="/fundamentacao" routerLinkActive="active">
+        <mat-icon>menu_book</mat-icon>
+        <span>Fundamentação</span>
+      </a>
+      <a class="sidebar-item" routerLink="/impacto" routerLinkActive="active">
+        <mat-icon>insights</mat-icon>
+        <span>Impacto</span>
+      </a>
+      <a class="sidebar-item" routerLink="/sobre" routerLinkActive="active">
+        <mat-icon>info</mat-icon>
+        <span>Sobre o Projeto</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button class="sidebar-toggle-btn" (click)="toggleSidebar()">
+        <mat-icon>{{ sidebarOpen ? 'chevron_left' : 'chevron_right' }}</mat-icon>
+        <span>{{ sidebarOpen ? 'Recolher' : 'Expandir' }}</span>
+      </button>
+    </div>
+  </aside>
+  
+<div class="sobre-container">
+  <!-- Header -->
+  <div class="header-section">
+    <div class="header-icon">
+      <mat-icon>info</mat-icon>
+    </div>
+    <h1 class="header-title">Sobre o RevisaLab</h1>
+    <p class="subtitle">Plataforma Gamificada de Nivelamento Acadêmico</p>
+  </div>
+
+  <!-- Container centralizado -->
+  <div class="content-wrapper">
+    
+    <!-- Projeto TCC -->
+    <mat-card class="sobre-card project-card">
+      <div class="card-header">
+        <div class="header-bullet"></div>
+        <h2 class="card-title">O Projeto</h2>
+      </div>
+      <div class="card-content">
+        <p class="card-text">
+          O <strong>RevisaLab</strong> é uma plataforma web gamificada desenvolvida como Projeto Final de Curso (TCC) em Engenharia de Software. 
+          O objetivo é apoiar estudantes universitários no nivelamento de conhecimentos do ensino médio, facilitando a permanência e o sucesso acadêmico no ensino superior.
+        </p>
+        <div class="project-info">
+          <div class="info-item">
+            <strong>Autora:</strong> {{ projectInfo.author }}
+          </div>
+          <div class="info-item">
+            <strong>Orientador:</strong> {{ projectInfo.advisor }}
+          </div>
+          <div class="info-item">
+            <strong>Curso:</strong> {{ projectInfo.course }}
+          </div>
+          <div class="info-item">
+            <strong>Ano:</strong> {{ projectInfo.year }}
+          </div>
+          <div class="info-item">
+            <strong>Tipo:</strong> {{ projectInfo.type }}
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Problema e Solução -->
+    <mat-card class="sobre-card problem-card">
+      <div class="card-header">
+        <mat-icon class="header-icon">lightbulb</mat-icon>
+        <h2 class="card-title">Problema e Solução</h2>
+      </div>
+      <div class="card-content">
+        <div class="problem-solution">
+          <div class="problem">
+            <h3>😟 O Problema</h3>
+            <p>Muitos estudantes ingressam no ensino superior com lacunas de conhecimento do ensino médio, especialmente em disciplinas básicas como Matemática, Física, Química e Português. Isso resulta em:</p>
+            <ul>
+              <li>Alta taxa de reprovação em disciplinas iniciais</li>
+              <li>Desmotivação e evasão universitária</li>
+              <li>Dificuldade em acompanhar o ritmo da graduação</li>
+              <li>Falta de recursos acessíveis para nivelamento</li>
+            </ul>
+          </div>
+          <div class="solution">
+            <h3>✨ A Solução</h3>
+            <p>O RevisaLab oferece uma abordagem gamificada e estruturada para o nivelamento acadêmico:</p>
+            <ul>
+              <li>Trilhas de aprendizagem organizadas por disciplina</li>
+              <li>Feedback imediato em cada questão</li>
+              <li>Sistema de gamificação (XP, níveis, badges, ranking)</li>
+              <li>Painel de desempenho com identificação de pontos fracos</li>
+              <li>Acesso gratuito e disponível 24/7</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Funcionalidades -->
+    <mat-card class="sobre-card features-card">
+      <div class="card-header">
+        <mat-icon class="header-icon">check_circle</mat-icon>
+        <h2 class="card-title">Funcionalidades</h2>
+      </div>
+      <div class="card-content">
+        <div class="features-grid">
+          <div class="feature-item" *ngFor="let f of features">
+            <mat-icon class="feature-icon">{{ f.icon }}</mat-icon>
+            <div class="feature-content">
+              <h4>{{ f.title }}</h4>
+              <p>{{ f.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Stack Tecnológico -->
+    <mat-card class="sobre-card tech-card">
+      <div class="card-header">
+        <mat-icon class="header-icon">code</mat-icon>
+        <h2 class="card-title">Stack Tecnológico</h2>
+      </div>
+      <div class="card-content">
+        <div class="tech-grid">
+          <div class="tech-item" *ngFor="let t of technologies">
+            <div class="tech-name">{{ t.name }}</div>
+            <div class="tech-description">{{ t.description }}</div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Objetivos do TCC -->
+    <mat-card class="sobre-card objectives-card">
+      <div class="card-header">
+        <mat-icon class="header-icon">track_changes</mat-icon>
+        <h2 class="card-title">Objetivos do TCC</h2>
+      </div>
+      <div class="card-content">
+        <div class="objectives-grid">
+          <div class="objective-item" *ngFor="let obj of objectives">
+            <div class="objective-header">
+              <mat-icon class="objective-icon">{{ obj.icon }}</mat-icon>
+              <h3>{{ obj.title }}</h3>
+            </div>
+            <p *ngIf="obj.description" class="objective-description">{{ obj.description }}</p>
+            <ul *ngIf="obj.items" class="objective-list">
+              <li *ngFor="let item of obj.items">
+                <mat-icon class="list-icon">check_circle</mat-icon>
+                {{ item }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Resultados Esperados -->
+    <mat-card class="sobre-card results-card">
+      <div class="card-header">
+        <mat-icon class="header-icon">analytics</mat-icon>
+        <h2 class="card-title">Resultados Esperados</h2>
+      </div>
+      <div class="card-content">
+        <div class="results-grid">
+          <div class="result-item" *ngFor="let result of expectedResults">
+            <div class="result-metric">{{ result.metric }}</div>
+            <mat-icon class="result-icon">{{ result.icon }}</mat-icon>
+            <h4 class="result-title">{{ result.title }}</h4>
+            <p class="result-description">{{ result.description }}</p>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Equipe -->
+    <mat-card class="sobre-card team-card">
+      <div class="card-header">
+        <mat-icon class="header-icon">people</mat-icon>
+        <h2 class="card-title">Equipe</h2>
+      </div>
+      <div class="card-content">
+        <div class="team-grid">
+          <div class="team-member">
+            <div class="member-avatar">👩‍💻</div>
+            <div class="member-info">
+              <h3>{{ projectInfo.author }}</h3>
+              <p class="member-role">Desenvolvedora Full Stack</p>
+              <p class="member-description">Estudante de Engenharia de Software responsável pelo desenvolvimento completo da plataforma.</p>
+            </div>
+          </div>
+          <div class="team-member">
+            <div class="member-avatar">👨‍🏫</div>
+            <div class="member-info">
+              <h3>{{ projectInfo.advisor }}</h3>
+              <p class="member-role">Orientador</p>
+              <p class="member-description">Professor orientador do projeto, responsável pela supervisão técnica e acadêmica.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Footer -->
+    <mat-card class="footer-card">
+      <div class="footer-icon">
+        <mat-icon class="red">favorite</mat-icon>
+      </div>
+      <h3 class="footer-title">Desenvolvido com dedicação para a educação</h3>
+      <p class="footer-subtitle">Projeto Final de Curso — Engenharia de Software — 2026</p>
+      <a class="footer-feedback-link" routerLink="/feedback">💬 Deixar um feedback</a>
+    </mat-card>
+  </div>
+</div>
+</div>

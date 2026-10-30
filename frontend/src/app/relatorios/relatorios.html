@@ -1,0 +1,112 @@
+<div class="relatorios-container">
+  <mat-card class="header-card">
+    <mat-card-header>
+      <mat-card-title>Meu Desempenho</mat-card-title>
+      <mat-card-subtitle>Acompanhe sua evolução e identifique pontos de melhoria</mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+
+  <!-- Statistics Cards -->
+  <div class="stats-grid">
+    <mat-card class="stat-card" *ngFor="let card of statCards">
+      <mat-card-content>
+        <div class="stat-header">
+          <div class="stat-icon" [ngStyle]="{'background-color': card.color}">
+            <mat-icon>{{ card.icon }}</mat-icon>
+          </div>
+          <div class="stat-trend" *ngIf="card.trend" [ngStyle]="{'color': getTrendColor(card.trend)}">
+            <mat-icon>{{ getTrendIcon(card.trend) }}</mat-icon>
+            <span>{{ Math.abs(card.trend) }}%</span>
+          </div>
+        </div>
+        <div class="stat-content">
+          <h3 class="stat-value">{{ card.value }}</h3>
+          <p class="stat-title">{{ card.title }}</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Charts Section -->
+  <div class="charts-grid">
+    <!-- User Progress Chart -->
+    <mat-card class="chart-card">
+      <mat-card-header>
+        <mat-card-title>Seu Progresso Mensal</mat-card-title>
+        <mat-card-subtitle>Questões respondidas por mês</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="chart-container">
+          <div class="bar-chart">
+            <div class="chart-bar" *ngFor="let label of userProgressData.labels; let i = index"
+                 [ngStyle]="getChartStyle(userProgressData.data, i)">
+              <span class="bar-value">{{ userProgressData.data[i] }}</span>
+              <span class="bar-label">{{ label }}</span>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Content by Category -->
+    <mat-card class="chart-card">
+      <mat-card-header>
+        <mat-card-title>Desempenho por Área</mat-card-title>
+        <mat-card-subtitle>Taxa de acerto por disciplina</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="chart-container">
+          <div class="pie-chart">
+            <div class="pie-slice" *ngFor="let label of contentByCategory.labels; let i = index"
+                 [ngStyle]="{'background-color': contentByCategory.colors[i]}">
+              <span class="slice-label">{{ label }}</span>
+              <span class="slice-value">{{ contentByCategory.data[i] }}</span>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Quiz Performance -->
+    <mat-card class="chart-card">
+      <mat-card-header>
+        <mat-card-title>Pontos Fracos Identificados</mat-card-title>
+        <mat-card-subtitle>Áreas que precisam de mais atenção</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="chart-container">
+          <div class="donut-chart">
+            <div class="donut-segment" *ngFor="let label of quizPerformance.labels; let i = index"
+                 [ngStyle]="{'border-color': quizPerformance.colors[i]}">
+              <span class="segment-label">{{ label }}</span>
+              <span class="segment-value">{{ quizPerformance.data[i] }}%</span>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Recent Activities -->
+  <mat-card class="activities-card">
+    <mat-card-header>
+      <mat-card-title>Atividades Recentes</mat-card-title>
+      <mat-card-subtitle>Últimas ações dos usuários</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="activities-list">
+        <p class="activities-empty" *ngIf="recentActivities.length === 0">Nenhuma atividade registrada ainda.</p>
+        <div class="activity-item" *ngFor="let activity of recentActivities">
+          <div class="activity-icon" [ngStyle]="{'background-color': activity.color}">
+            <mat-icon>{{ activity.icon }}</mat-icon>
+          </div>
+          <div class="activity-content">
+            <p class="activity-user">{{ activity.user }}</p>
+            <p class="activity-action">{{ activity.action }}</p>
+            <p class="activity-time">{{ activity.time }}</p>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,343 @@
+.page-with-sidebar {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: calc(100vh - 64px);
+  transition: grid-template-columns 0.3s ease;
+
+  &:has(.sidebar.collapsed) {
+    grid-template-columns: 60px 1fr;
+  }
+}
+
+.sidebar {
+  background: linear-gradient(180deg, #1e3a8a 0%, #1e40af 100%);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  position: sticky;
+  top: 64px;
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: all 0.3s ease;
+  width: 240px;
+
+  &.collapsed {
+    width: 60px;
+    padding: 24px 8px;
+    
+    .sidebar-item {
+      justify-content: center;
+      padding: 12px;
+      
+      span {
+        display: none;
+      }
+    }
+  }
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.brand-emoji {
+  font-size: 28px;
+  flex-shrink: 0;
+  display: none;
+}
+
+.sidebar.collapsed .brand-emoji {
+  display: block;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 11px 14px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  mat-icon {
+    color: white !important;
+    font-size: 22px !important;
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  span {
+    line-height: 20px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
+    background: rgba(255,255,255,0.1);
+    color: white;
+  }
+
+  &.active {
+    background: rgba(14, 165, 233, 0.25);
+    color: #0ea5e9;
+    font-weight: 700;
+  }
+}
+
+.sidebar-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 16px;
+  margin-top: 8px;
+}
+
+.sidebar-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 14px;
+  background: rgba(14, 165, 233, 0.15);
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  border-radius: 12px;
+  color: #0ea5e9;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+
+  mat-icon {
+    color: #0ea5e9 !important;
+    font-size: 20px !important;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  span {
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
+    background: rgba(14, 165, 233, 0.25);
+    border-color: rgba(14, 165, 233, 0.5);
+  }
+}
+
+.sidebar.collapsed .sidebar-toggle-btn {
+  padding: 12px;
+  
+  span {
+    display: none;
+  }
+}
+
+.fundamentacao-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #f8fafc 100%);
+  min-height: calc(100vh - 64px);
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 32px;
+
+  .page-title {
+    font-size: 36px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #1e3a8a 0%, #0ea5e9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 0 12px;
+    letter-spacing: -1px;
+  }
+
+  .page-subtitle {
+    font-size: 16px;
+    color: #64748b;
+    font-weight: 500;
+    margin: 0;
+  }
+}
+
+mat-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(30, 58, 138, 0.06);
+  margin-bottom: 24px;
+  border: 2px solid #e2e8f0;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(30, 58, 138, 0.1);
+  }
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 24px 16px;
+  border-bottom: 2px solid #e2e8f0;
+
+  .header-icon {
+    color: #1e3a8a;
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+  }
+
+  h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+  }
+}
+
+.card-content {
+  padding: 24px;
+}
+
+// Contexto da Pesquisa
+.context-card {
+  .context-item {
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0.05) 0%, rgba(14, 165, 233, 0.05) 100%);
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #1e3a8a;
+    margin-bottom: 20px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1e3a8a;
+      margin: 0 0 12px 0;
+    }
+
+    p {
+      font-size: 15px;
+      color: #475569;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .research-question {
+      font-style: italic;
+      font-weight: 500;
+      color: #334155;
+    }
+  }
+}
+
+// Pilares Teóricos
+.pillars-card {
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .pillar-item {
+    display: flex;
+    gap: 16px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid #e2e8f0;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.1);
+      border-color: #1e3a8a;
+    }
+
+    .pillar-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+      mat-icon {
+        color: white;
+        font-size: 28px;
+        width: 28px;
+        height: 28px;
+        flex-shrink: 0;
+      }
+    }
+
+    .pillar-content {
+      flex: 1;
+
+      h3 {
+        font-size: 17px;
+        font-weight: 700;
+        color: #0f172a;
+        margin: 0 0 8px 0;
+      }
+
+      p {
+        font-size: 14px;
+        color: #64748b;
+        line-height: 1.5;
+        margin: 0 0 8px 0;
+      }
+
+      .reference {
+        font-size: 12px;
+        color: #94a3b8;
+        font-style: italic;
+      }
+    }
+  }
+}
+
+// Responsividade
+@media (max-width: 768px) {
+  .pillars-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-title {
+    font-size: 28px;
+  }
+}

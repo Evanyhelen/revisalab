@@ -1,0 +1,38 @@
+server:
+  port: 8081 # Porta diferente para testes
+  servlet:
+    context-path: /api
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:revisalab_test
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+  h2:
+    console:
+      enabled: false
+
+app:
+  jwt:
+    secret: test-jwt-secret-for-testing-only-minimum-64-bytes-12345678901234567890123456789012
+    expiration: 60000 # 1 minuto para testes
+
+# Configuração de teste para Groq (não será usada em testes reais)
+groq:
+  api:
+    key: ${GROQ_API_KEY_TEST:test-key-not-used}
+    url: https://api.groq.com/openai/v1/chat/completions
+    model: llama-3.1-8b-instant
+    timeout: 10000 # 10 segundos para testes
+    
+logging:
+  level:
+    com.revisalab: INFO
+    org.springframework: WARN
+    root: WARN

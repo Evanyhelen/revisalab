@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "titulo": "Vídeo: Frações - Introdução",
+    "tipo": "video",
+    "descricao": "Vídeo educativo sobre conceitos básicos de frações para alunos do 6º ano",
+    "professorId": 1,
+    "dataUpload": "2024-11-01",
+    "tamanho": "15.5 MB",
+    "duracao": "12 minutos",
+    "categoria": "Matemática"
+  },
+  {
+    "id": 2,
+    "titulo": "Slides: Regras de Acordo Verbal",
+    "tipo": "slide",
+    "descricao": "Apresentação em slides sobre as principais regras de acordo verbal da língua portuguesa",
+    "professorId": 2,
+    "dataUpload": "2024-11-05",
+    "tamanho": "2.3 MB",
+    "duracao": "18 slides",
+    "categoria": "Português"
+  },
+  {
+    "id": 3,
+    "titulo": "Texto: O Sistema Solar",
+    "tipo": "texto",
+    "descricao": "Material em PDF sobre os planetas e características do Sistema Solar",
+    "professorId": 3,
+    "dataUpload": "2024-11-08",
+    "tamanho": "1.8 MB",
+    "duracao": "8 páginas",
+    "categoria": "Ciências"
+  },
+  {
+    "id": 4,
+    "titulo": "Vídeo: Geometria - Áreas e Perímetros",
+    "tipo": "video",
+    "descricao": "Explicação detalhada sobre cálculo de áreas e perímetros de figuras planas",
+    "professorId": 1,
+    "dataUpload": "2024-11-12",
+    "tamanho": "22.1 MB",
+    "duracao": "18 minutos",
+    "categoria": "Matemática"
+  },
+  {
+    "id": 5,
+    "titulo": "Slides: Pontuação - Uso da Vírgula",
+    "tipo": "slide",
+    "descricao": "Guia completo sobre o uso correto da vírgula na pontuação",
+    "professorId": 2,
+    "dataUpload": "2024-11-15",
+    "tamanho": "1.5 MB",
+    "duracao": "12 slides",
+    "categoria": "Português"
+  }
+]

@@ -1,0 +1,792 @@
+.page-with-sidebar {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: calc(100vh - 64px);
+  transition: grid-template-columns 0.3s ease;
+
+  &:has(.sidebar.collapsed) {
+    grid-template-columns: 60px 1fr;
+  }
+}
+
+.sidebar {
+  background: linear-gradient(180deg, #1e3a8a 0%, #1e40af 100%);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  position: sticky;
+  top: 64px;
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: all 0.3s ease;
+  width: 240px;
+
+  &.collapsed {
+    width: 60px;
+    padding: 24px 8px;
+    
+    .sidebar-item {
+      justify-content: center;
+      padding: 12px;
+      
+      span {
+        display: none;
+      }
+    }
+  }
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.brand-emoji {
+  font-size: 28px;
+  flex-shrink: 0;
+  display: none;
+}
+
+.sidebar.collapsed .brand-emoji {
+  display: block;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 11px 14px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  mat-icon {
+    color: white !important;
+    font-size: 22px !important;
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  span {
+    line-height: 20px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
+    background: rgba(255,255,255,0.1);
+    color: white;
+  }
+
+  &.active {
+    background: rgba(14, 165, 233, 0.25);
+    color: #0ea5e9;
+    font-weight: 700;
+  }
+}
+
+.sidebar-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 16px;
+  margin-top: 8px;
+}
+
+.sidebar-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 14px;
+  background: rgba(14, 165, 233, 0.15);
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  border-radius: 12px;
+  color: #0ea5e9;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+
+  mat-icon {
+    color: #0ea5e9 !important;
+    font-size: 20px !important;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  span {
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
+    background: rgba(14, 165, 233, 0.25);
+    border-color: rgba(14, 165, 233, 0.5);
+  }
+}
+
+.sidebar.collapsed .sidebar-toggle-btn {
+  padding: 12px;
+  
+  span {
+    display: none;
+  }
+}
+
+// ESTILO NEUTRO - Remove gradiente lilás
+.sobre-container {
+  padding: 40px;
+  max-width: 1280px;
+  margin: 0 auto;
+  min-height: calc(100vh - 64px);
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #f8fafc 100%);
+}
+
+// Conteúdo principal expande para ocupar espaço
+.content-wrapper {
+  flex-grow: 1; // Expande para ocupar todo espaço disponível
+  width: 100%;
+}
+
+// Header - cores neutras para fundo claro
+.header-section {
+  text-align: center;
+  margin-bottom: 3rem;
+  
+  .header-icon {
+    background: linear-gradient(135deg, #1e3a8a 0%, #0ea5e9 100%);
+    color: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 20px rgba(30, 58, 138, 0.3);
+  }
+  
+  .header-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #1e3a8a 0%, #0ea5e9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+  }
+  
+  .subtitle {
+    font-size: 1.1rem;
+    color: #64748b;
+    font-weight: 500;
+    margin-top: 0.5rem;
+  }
+}
+
+// Cards - MESMO padrão de Biblioteca e Dashboard
+.sobre-card {
+  background: white; // Card branco padrão
+  border-radius: 15px; // Mesmo border-radius
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); // Mesma sombra
+  margin-bottom: 24px; // Mesma margem do projeto
+  overflow: hidden;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-4px); // Mesmo hover do Dashboard
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// Headers dos cards - mesmo padrão
+.card-header {
+  display: flex;
+  align-items: center;
+  padding: 24px 28px 16px 28px; // Padding padrão do projeto
+  
+  .header-bullet {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 12px;
+    background: #1e3a5f !important; // Azul escuro como o footer
+    box-shadow: 0 0 12px rgba(30, 58, 95, 0.4);
+  }
+  
+  .header-icon {
+    color: #4ade80;
+    margin-right: 12px;
+    font-size: 24px;
+    
+    &.globe {
+      color: #1e3a5f !important; // Azul escuro como o footer
+      background: none;
+      -webkit-background-clip: unset;
+      -webkit-text-fill-color: unset;
+      background-clip: unset;
+    }
+  }
+  
+  .card-title {
+    font-size: 1.5rem; // Mesmo tamanho do Biblioteca
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+  }
+}
+
+// Card de Projeto - padding padrão
+.project-card {
+  .card-content {
+    padding: 0 28px 24px 28px;
+  }
+  
+  .card-text {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #495057;
+    margin: 0 0 1.5rem 0;
+    text-align: left;
+    
+    strong {
+      color: #1e40af;
+      font-weight: 600;
+    }
+  }
+
+  .project-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    background: rgba(30, 64, 175, 0.05);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(30, 64, 175, 0.15);
+
+    .info-item {
+      font-size: 0.9rem;
+      color: #495057;
+
+      strong {
+        color: #2c3e50;
+        font-weight: 600;
+        display: block;
+        margin-bottom: 0.25rem;
+      }
+    }
+  }
+}
+
+// Card de Problema e Solução
+.problem-card {
+  .card-content {
+    padding: 0 28px 24px 28px;
+  }
+
+  .problem-solution {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+
+    .problem, .solution {
+      background: rgba(0, 0, 0, 0.02);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid #e2e8f0;
+
+      h3 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin: 0 0 1rem 0;
+      }
+
+      p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #495057;
+        margin: 0 0 1rem 0;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 1.5rem;
+
+        li {
+          font-size: 0.9rem;
+          color: #6c757d;
+          margin: 0.5rem 0;
+          line-height: 1.5;
+        }
+      }
+    }
+
+    .solution {
+      background: rgba(30, 64, 175, 0.05);
+      border-color: rgba(30, 64, 175, 0.2);
+    }
+  }
+}
+
+// Card Funcionalidades - Grid como Dashboard
+.features-card {
+  .card-content {
+    padding: 0 28px 24px 28px; // Padding padrão
+  }
+  
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); // 2 colunas como Dashboard
+    gap: 1.5rem; // Mesmo gap do Dashboard
+    margin-top: 1rem;
+  }
+  
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 12px;
+    padding: 1.25rem; // Padding padrão
+    border: 1px solid #e2e8f0; // Borda padrão
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      background: rgba(0, 0, 0, 0.04);
+    }
+    
+    .feature-icon {
+      color: #4ade80;
+      font-size: 20px;
+      margin-right: 1rem;
+      margin-top: 2px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      
+      &.blue {
+        color: #1e3a5f !important; // Azul escuro como o footer
+        background: none;
+        -webkit-background-clip: unset;
+        -webkit-text-fill-color: unset;
+        background-clip: unset;
+      }
+    }
+    
+    .feature-content {
+      h4 {
+        font-size: 0.95rem; // Mesmo tamanho do projeto
+        font-weight: 600;
+        color: #2c3e50;
+        margin: 0 0 0.25rem 0;
+      }
+      
+      p {
+        font-size: 0.8rem; // Mesmo tamanho do projeto
+        color: #6c757d;
+        margin: 0;
+        line-height: 1.4;
+      }
+    }
+  }
+}
+
+// Footer card - DESTACADO para melhor visibilidade
+.footer-card {
+  background: white !important; // Fundo branco para destacar
+  border-radius: 16px;
+  text-align: center;
+  padding: 2.5rem 2rem; // Padding aumentado
+  margin-top: 2rem;
+  margin-bottom: 0 !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important; // Borda sutil
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important; // Sombra visível
+  
+  .footer-icon {
+    color: #ef4444;
+    font-size: 28px; // Tamanho aumentado
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .footer-title {
+    font-size: 1.4rem; // Tamanho aumentado
+    font-weight: 700; // Peso aumentado
+    color: #1e3a5f !important; // Azul escuro do footer para contraste
+    margin: 0 0 0.75rem 0;
+    text-shadow: none; // Remove sombra em fundo branco
+    letter-spacing: -0.5px; // Melhor legibilidade
+  }
+  
+  .footer-subtitle {
+    font-size: 1.1rem; // Tamanho aumentado
+    color: #4a5568 !important; // Cinza escuro para bom contraste
+    margin: 0;
+    font-weight: 500; // Peso médio para destaque
+  }
+
+  .footer-feedback-link {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 999px;
+    background: #1e3a8a;
+    color: #fff !important;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: #172a63;
+    }
+  }
+}
+
+// Card de Objetivos
+.objectives-card {
+  .card-content {
+    padding: 0 28px 24px 28px;
+  }
+
+  .objectives-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .objective-item {
+    background: rgba(30, 64, 175, 0.05);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid rgba(30, 64, 175, 0.15);
+
+    .objective-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1rem;
+
+      .objective-icon {
+        color: #1e40af;
+        font-size: 28px;
+        width: 28px;
+        height: 28px;
+      }
+
+      h3 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin: 0;
+      }
+    }
+
+    .objective-description {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #495057;
+      margin: 0;
+    }
+
+    .objective-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 0.95rem;
+        color: #495057;
+        margin: 0.75rem 0;
+        line-height: 1.5;
+
+        .list-icon {
+          color: #4ade80;
+          font-size: 20px;
+          width: 20px;
+          height: 20px;
+          flex-shrink: 0;
+          margin-top: 2px;
+        }
+      }
+    }
+  }
+}
+
+// Card de Resultados Esperados
+.results-card {
+  .card-content {
+    padding: 0 28px 24px 28px;
+  }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .result-item {
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .result-metric {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1e3a8a 0%, #0ea5e9 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .result-icon {
+      color: #f5a623;
+      font-size: 32px;
+      width: 32px;
+      height: 32px;
+      margin: 0.5rem auto;
+    }
+
+    .result-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin: 0.75rem 0 0.5rem 0;
+    }
+
+    .result-description {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: #6c757d;
+      margin: 0;
+    }
+  }
+}
+
+// Card de Stack Tecnológico
+.tech-card {
+  .card-content {
+    padding: 0 28px 24px 28px;
+  }
+
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .tech-item {
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 12px;
+    padding: 1.25rem;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: rgba(30, 64, 175, 0.05);
+      border-color: rgba(30, 64, 175, 0.2);
+    }
+
+    .tech-name {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+    }
+
+    .tech-description {
+      font-size: 0.85rem;
+      color: #6c757d;
+      line-height: 1.5;
+    }
+  }
+}
+
+// Card de Equipe
+.team-card {
+  .card-content {
+    padding: 0 28px 24px 28px;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .team-member {
+    display: flex;
+    gap: 1.5rem;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid #e2e8f0;
+
+    .member-avatar {
+      font-size: 3rem;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+      border-radius: 12px;
+      flex-shrink: 0;
+    }
+
+    .member-info {
+      h3 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin: 0 0 0.25rem 0;
+      }
+
+      .member-role {
+        font-size: 0.9rem;
+        color: #1e40af;
+        font-weight: 600;
+        margin: 0 0 0.75rem 0;
+      }
+
+      .member-description {
+        font-size: 0.85rem;
+        line-height: 1.5;
+        color: #6c757d;
+        margin: 0;
+      }
+    }
+  }
+}
+
+// Remove margem do último elemento antes do footer
+.content-wrapper > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+// REMOVE o copyright separado - agora está no footer component
+// .copyright { display: none; } // Removido para evitar espaço em branco
+
+// Remove espaço do componente
+:host {
+  display: block;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100%;
+}
+
+// Responsividade - MESMO padrão do projeto
+@media (max-width: 768px) {
+  .sobre-container {
+    padding: 1.5rem; // Padding mobile padrão
+  }
+  
+  .header-section {
+    margin-bottom: 2rem; // Menos espaço em mobile
+    
+    .header-title {
+      font-size: 2rem; // Menor em mobile
+    }
+  }
+  
+  .problem-solution,
+  .results-grid,
+  .tech-grid,
+  .team-grid,
+  .features-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .methodology-timeline {
+    padding-left: 1.5rem;
+
+    &::before {
+      left: 15px;
+    }
+  }
+
+  .timeline-item {
+    padding-left: 2.5rem;
+
+    .timeline-marker {
+      width: 36px;
+      height: 36px;
+
+      mat-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+  
+  .card-header {
+    padding: 1.25rem 1.5rem 0.75rem 1.5rem; // Menos padding em mobile
+  }
+  
+  .mission-card .card-content,
+  .ods-card .card-content,
+  .features-card .card-content {
+    padding: 0 1.5rem 1.25rem 1.5rem !important; // Menos padding em mobile
+  }
+  
+  .footer-card {
+    padding: 1.5rem !important; // Menos padding em mobile
+  }
+}
+
+@media (max-width: 480px) {
+  .header-section .header-title {
+    font-size: 1.75rem; // Muito menor em mobile pequeno
+  }
+  
+  .card-title {
+    font-size: 1.25rem !important; // Menor título em mobile
+  }
+  
+  .card-text {
+    font-size: 1rem !important; // Menor texto em mobile
+  }
+}

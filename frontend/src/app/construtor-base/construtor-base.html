@@ -1,0 +1,312 @@
+<div class="page-with-sidebar">
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.collapsed]="sidebarCollapsed">
+    <div class="sidebar-brand">
+      <span class="brand-emoji">📖</span>
+    </div>
+    
+    <nav class="sidebar-nav">
+      <a routerLink="/dashboard" class="sidebar-item" routerLinkActive="active">
+        <mat-icon>grid_view</mat-icon>
+        <span>Início</span>
+      </a>
+      <a routerLink="/trilhas" class="sidebar-item" routerLinkActive="active">
+        <mat-icon>route</mat-icon>
+        <span>Trilhas</span>
+      </a>
+      <a routerLink="/praticar" class="sidebar-item" routerLinkActive="active">
+        <mat-icon>sports_esports</mat-icon>
+        <span>Praticar</span>
+      </a>
+      <a routerLink="/conquistas" class="sidebar-item" routerLinkActive="active">
+        <mat-icon>military_tech</mat-icon>
+        <span>Conquistas</span>
+      </a>
+      <a routerLink="/ranking" class="sidebar-item" routerLinkActive="active">
+        <mat-icon>leaderboard</mat-icon>
+        <span>Ranking</span>
+      </a>
+      <a routerLink="/chat" class="sidebar-item" routerLinkActive="active">
+        <mat-icon>smart_toy</mat-icon>
+        <span>Chat IA</span>
+      </a>
+      <a routerLink="/missoes" class="sidebar-item" routerLinkActive="active">
+        <mat-icon>assignment</mat-icon>
+        <span>Missões do Dia</span>
+      </a>
+      <a routerLink="/construtor-base" class="sidebar-item" routerLinkActive="active">
+        <mat-icon>apartment</mat-icon>
+        <span>Construtor de Base</span>
+      </a>
+      <a routerLink="/fundamentacao" class="sidebar-item" routerLinkActive="active">
+        <mat-icon>menu_book</mat-icon>
+        <span>Fundamentação</span>
+      </a>
+      <a routerLink="/impacto" class="sidebar-item" routerLinkActive="active">
+        <mat-icon>insights</mat-icon>
+        <span>Impacto</span>
+      </a>
+      <a routerLink="/sobre" class="sidebar-item" routerLinkActive="active">
+        <mat-icon>info</mat-icon>
+        <span>Sobre o Projeto</span>
+      </a>
+    </nav>
+    
+    <div class="sidebar-bottom">
+      <button class="sidebar-toggle-btn" (click)="toggleSidebar()">
+        <mat-icon>{{ sidebarCollapsed ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+        <span>{{ sidebarCollapsed ? 'Expandir' : 'Recolher' }}</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="construtor-container">
+      <!-- Header -->
+      <div class="page-header">
+        <div class="header-icon-circle">
+          <mat-icon>apartment</mat-icon>
+        </div>
+        <div class="header-content">
+          <h1 class="page-title">Construtor de Base Acadêmica</h1>
+          <p class="page-subtitle">Desenvolva sua fundamentação teórica construindo conhecimento</p>
+        </div>
+      </div>
+
+      <!-- Start Screen -->
+      <div class="start-screen" *ngIf="!gameStarted">
+        <mat-card class="start-card">
+          <div class="start-content">
+            <div class="start-icon">🏗️</div>
+            <h2>Construa sua Base de Conhecimento</h2>
+            <p>Responda corretamente às perguntas e veja sua base acadêmica crescer visualmente.</p>
+            
+            <div class="game-rules">
+              <div class="rule-item">
+                <mat-icon class="rule-icon">check_circle</mat-icon>
+                <span>Resposta correta adiciona um bloco</span>
+              </div>
+              <div class="rule-item">
+                <mat-icon class="rule-icon">cancel</mat-icon>
+                <span>Resposta incorreta remove um bloco</span>
+              </div>
+            </div>
+
+            <button mat-raised-button class="btn-start" (click)="startGame()" [disabled]="loading">
+              <mat-icon class="spin-icon" *ngIf="loading">hourglass_empty</mat-icon>
+              <mat-icon *ngIf="!loading">play_arrow</mat-icon>
+              {{ loading ? 'Carregando nova atividade…' : 'Iniciar Construção' }}
+            </button>
+
+            <div class="builder-error" *ngIf="loadError" role="alert">
+              <mat-icon>error_outline</mat-icon>
+              <span>Não foi possível carregar a atividade. Tente novamente.</span>
+              <button mat-raised-button class="btn-retry" #startRetry (click)="retryLoad()">
+                <mat-icon>refresh</mat-icon>
+                Tentar novamente
+              </button>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+
+      <!-- Game Screen -->
+      <div class="game-screen" *ngIf="gameStarted && !showCelebration">
+        <div class="game-layout">
+          <!-- Left: Building Progress -->
+          <div class="building-section">
+            <mat-card class="building-card">
+              <div class="building-header">
+                <h3>Sua Base Acadêmica</h3>
+                <div class="building-stats">
+                  <span class="stat-label">Altura:</span>
+                  <span class="stat-value">{{ buildingHeight }}/{{ totalQuestions }}</span>
+                  <span class="stat-label">Nível:</span>
+                  <span class="stat-value">{{ buildingHeight === 0 ? 'Iniciante' : buildingHeight <= 3 ? 'Básico' : buildingHeight <= 6 ? 'Intermediário' : 'Avançado' }}</span>
+                </div>
+              </div>
+
+              <div class="progress-section">
+                <div class="progress-info">
+                  <span class="progress-text">Progresso da Base: {{ Math.floor((buildingHeight / totalQuestions) * 100) }}%</span>
+                  <span class="progress-blocks">Restam: {{ totalQuestions - buildingHeight }} blocos</span>
+                </div>
+                <mat-progress-bar 
+                  mode="determinate" 
+                  [value]="(buildingHeight / totalQuestions) * 100"
+                  class="custom-progress">
+                </mat-progress-bar>
+              </div>
+
+              <div class="building-container">
+                <div class="building-wrapper">
+                  <!-- Building blocks (rendered from bottom to top) -->
+                  <div class="building-blocks">
+                    <div 
+                      *ngFor="let block of [].constructor(buildingHeight); let i = index"
+                      class="building-block"
+                      [style.animation-delay]="i * 0.1 + 's'">
+                      <div class="block-content">
+                        <div class="block-windows">
+                          <span class="window"></span>
+                          <span class="window"></span>
+                          <span class="window"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Foundation -->
+                  <div class="building-foundation">
+                    <span class="foundation-text">BASE ACADÊMICA</span>
+                  </div>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+
+          <!-- Right: Question -->
+          <div class="question-section">
+            <mat-card class="question-card">
+              <div class="question-header">
+                <div class="question-progress">
+                  <span class="question-number">Questão {{ currentQuestionIndex + 1 }} de {{ totalQuestions }}</span>
+                  <mat-progress-bar 
+                    mode="determinate" 
+                    [value]="progress"
+                    class="question-progress-bar">
+                  </mat-progress-bar>
+                </div>
+                <div class="area-chip" [style.background-color]="currentQuestion.areaColor">
+                  {{ currentQuestion.area }}
+                </div>
+              </div>
+
+              <div class="question-content">
+                <h3 class="question-text" #gameHeading tabindex="-1">{{ currentQuestion.question }}</h3>
+
+                <div class="options-list">
+                  <button 
+                    *ngFor="let option of currentQuestion.options; let i = index"
+                    class="option-button"
+                    [class.selected]="selectedAnswer === i && !answered"
+                    [class.correct]="answered && i === currentQuestion.correctAnswer"
+                    [class.wrong]="answered && selectedAnswer === i && !isCorrect"
+                    [disabled]="answered || submitting"
+                    (click)="selectAnswer(i)">
+                    <span class="option-letter">{{ ['A', 'B', 'C', 'D', 'E'][i] }}</span>
+                    <span class="option-text">{{ option }}</span>
+                    <mat-icon *ngIf="answered && i === currentQuestion.correctAnswer" class="option-icon correct-icon">
+                      check_circle
+                    </mat-icon>
+                    <mat-icon *ngIf="answered && selectedAnswer === i && !isCorrect" class="option-icon wrong-icon">
+                      cancel
+                    </mat-icon>
+                  </button>
+                </div>
+
+                <!-- Explanation (shown after answer) -->
+                <div class="explanation-panel" *ngIf="answered">
+                  <div class="explanation-header" [class.correct]="isCorrect" [class.wrong]="!isCorrect">
+                    <mat-icon>{{ isCorrect ? 'check_circle' : 'cancel' }}</mat-icon>
+                    <span>{{ isCorrect ? 'Resposta Correta!' : 'Resposta Incorreta' }}</span>
+                  </div>
+                  <div class="explanation-content">
+                    <mat-icon class="info-icon">info</mat-icon>
+                    <p>{{ currentQuestion.explanation }}</p>
+                  </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                  <button 
+                    *ngIf="!answered"
+                    mat-raised-button 
+                    class="btn-submit"
+                    [disabled]="selectedAnswer === null || submitting"
+                    (click)="submitAnswer()">
+                    <mat-icon class="spin-icon" *ngIf="submitting">hourglass_empty</mat-icon>
+                    {{ submitting ? 'Validando…' : 'Confirmar Resposta' }}
+                  </button>
+                  
+                  <button 
+                    *ngIf="answered && currentQuestionIndex < totalQuestions - 1"
+                    mat-raised-button 
+                    class="btn-next"
+                    (click)="nextQuestion()">
+                    Próxima Questão
+                    <mat-icon>arrow_forward</mat-icon>
+                  </button>
+
+                  <button 
+                    *ngIf="answered && currentQuestionIndex === totalQuestions - 1 && !showCelebration"
+                    mat-raised-button 
+                    class="btn-finish"
+                    (click)="nextQuestion()">
+                    Ver Resultado
+                    <mat-icon>emoji_events</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+
+      <!-- Celebration Screen -->
+      <div class="celebration-screen" *ngIf="showCelebration">
+        <mat-card class="celebration-card">
+          <div class="celebration-content">
+            <div class="celebration-animation">
+              <div class="confetti"></div>
+              <div class="trophy-icon">🏆</div>
+            </div>
+            
+            <h2 class="celebration-title">Parabéns! Base Concluída!</h2>
+            <p class="celebration-subtitle">Você construiu sua base acadêmica com sucesso!</p>
+
+            <div class="final-stats">
+              <div class="stat-box">
+                <div class="stat-icon">✅</div>
+                <div class="stat-number">{{ correctAnswers }}</div>
+                <div class="stat-label">Acertos</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-icon">📊</div>
+                <div class="stat-number">{{ Math.floor((correctAnswers / totalQuestions) * 100) }}%</div>
+                <div class="stat-label">Aproveitamento</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-icon">🏗️</div>
+                <div class="stat-number">{{ buildingHeight }}</div>
+                <div class="stat-label">Blocos</div>
+              </div>
+            </div>
+
+            <div class="celebration-actions">
+              <button mat-raised-button class="btn-restart" (click)="restartGame()" [disabled]="loading">
+                <mat-icon class="spin-icon" *ngIf="loading">hourglass_empty</mat-icon>
+                <mat-icon *ngIf="!loading">refresh</mat-icon>
+                {{ loading ? 'Carregando nova atividade…' : 'Construir Novamente' }}
+              </button>
+              <button mat-raised-button class="btn-fundamentacao" (click)="goToFundamentacao()">
+                <mat-icon>menu_book</mat-icon>
+                Ir para Fundamentação
+              </button>
+            </div>
+
+            <div class="builder-error" *ngIf="loadError" role="alert">
+              <mat-icon>error_outline</mat-icon>
+              <span>Não foi possível carregar a nova atividade. Tente novamente.</span>
+              <button mat-raised-button class="btn-retry" #celebrationRetry (click)="retryLoad()">
+                <mat-icon>refresh</mat-icon>
+                Tentar novamente
+              </button>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </main>
+</div>

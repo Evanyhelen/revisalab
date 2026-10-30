@@ -1,0 +1,62 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /api
+
+spring:
+  datasource:
+    # Banco em arquivo (persiste entre reinicializaÃ§Ãµes) em vez de memÃ³ria,
+    # para que progresso/XP/usuÃ¡rios nÃ£o sejam perdidos ao reiniciar o backend.
+    url: jdbc:h2:file:./data/revisalabdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+      
+app:
+  jwt:
+    secret: ${JWT_SECRET:revisalab-jwt-secret-key-2026-platforma-gamificada-estudos-superior-with-minimum-64-bytes-for-hs512-encryption}
+    expiration: 86400000 # 24 horas em milissegundos
+    refresh-expiration: 604800000 # 7 dias em milissegundos
+  cors:
+    allowed-origins: http://localhost:4200
+  # URL pÃºblica do frontend usada para montar o link de recuperaÃ§Ã£o de senha.
+  frontend-url: ${FRONTEND_URL:http://localhost:4200}
+  mail:
+    # "log" = mecanismo de captura para dev (grava o e-mail em arquivo, sem SMTP).
+    # "smtp" = envia de fato via SMTP (requer as variÃ¡veis SPRING_MAIL_*).
+    mode: ${APP_MAIL_MODE:log}
+  password-reset:
+    # Validade do link de recuperaÃ§Ã£o (em minutos).
+    token-ttl-minutes: ${PASSWORD_RESET_TTL_MINUTES:30}
+    # Arquivo local onde o modo "log" grava os e-mails (usado nos testes e2e).
+    dev-capture-file: ${PASSWORD_RESET_DEV_CAPTURE_FILE:data/password-reset-links.log}
+
+# Groq AI Configuration (rÃ¡pido, compatÃ­vel com OpenAI)
+# A chave pode ser sobrescrita via variÃ¡vel de ambiente GROQ_API_KEY.
+groq:
+  api:
+    key: ${GROQ_API_KEY:}
+    url: https://api.groq.com/openai/v1/chat/completions
+    model: openai/gpt-oss-120b
+    timeout: 30000 # 30 segundos
+    
+logging:
+  level:
+    com.revisalab.service.AiService: INFO
+    com.revisalab.controller.ChatController: INFO
+    org.springframework.security: WARN

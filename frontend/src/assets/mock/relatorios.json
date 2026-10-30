@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "titulo": "Desempenho em Matemática - 6º Ano A",
+    "disciplina": "Matemática",
+    "turma": "6º Ano A",
+    "professorId": 1,
+    "dataGeracao": "2024-11-15",
+    "periodo": "Bimestre 1",
+    "estatisticas": {
+      "totalAlunos": 35,
+      "alunosPresentes": 32,
+      "mediaGeral": 7.2,
+      "aprovados": 28,
+      "reprovados": 4,
+      "recuperacao": 3
+    },
+    "distribuicaoNotas": [
+      { "faixa": "0-3", "quantidade": 2 },
+      { "faixa": "4-5", "quantidade": 3 },
+      { "faixa": "6-7", "quantidade": 15 },
+      { "faixa": "8-9", "quantidade": 10 },
+      { "faixa": "10", "quantidade": 2 }
+    ]
+  },
+  {
+    "id": 2,
+    "titulo": "Aproveitamento em Português - 7º Ano B",
+    "disciplina": "Português",
+    "turma": "7º Ano B",
+    "professorId": 2,
+    "dataGeracao": "2024-11-18",
+    "periodo": "Bimestre 2",
+    "estatisticas": {
+      "totalAlunos": 30,
+      "alunosPresentes": 28,
+      "mediaGeral": 6.8,
+      "aprovados": 24,
+      "reprovados": 4,
+      "recuperacao": 2
+    },
+    "distribuicaoNotas": [
+      { "faixa": "0-3", "quantidade": 1 },
+      { "faixa": "4-5", "quantidade": 4 },
+      { "faixa": "6-7", "quantidade": 12 },
+      { "faixa": "8-9", "quantidade": 9 },
+      { "faixa": "10", "quantidade": 2 }
+    ]
+  },
+  {
+    "id": 3,
+    "titulo": "Resultados em Ciências - 8º Ano C",
+    "disciplina": "Ciências",
+    "turma": "8º Ano C",
+    "professorId": 3,
+    "dataGeracao": "2024-11-20",
+    "periodo": "Bimestre 1",
+    "estatisticas": {
+      "totalAlunos": 28,
+      "alunosPresentes": 26,
+      "mediaGeral": 7.5,
+      "aprovados": 23,
+      "reprovados": 3,
+      "recuperacao": 1
+    },
+    "distribuicaoNotas": [
+      { "faixa": "0-3", "quantidade": 1 },
+      { "faixa": "4-5", "quantidade": 2 },
+      { "faixa": "6-7", "quantidade": 10 },
+      { "faixa": "8-9", "quantidade": 11 },
+      { "faixa": "10", "quantidade": 2 }
+    ]
+  }
+]

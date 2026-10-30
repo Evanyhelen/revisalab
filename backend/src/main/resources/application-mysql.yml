@@ -1,0 +1,26 @@
+# Profile "mysql": banco de produção/alternativo previsto na proposta (MySQL/H2).
+#
+# O default continua sendo H2 em arquivo (application.yml). Para trocar para
+# MySQL, basta ativar este profile:
+#
+#   mvn spring-boot:run -Dspring-boot.run.profiles=mysql
+#   # ou, no jar empacotado:
+#   java -jar revisalab.jar --spring.profiles.active=mysql
+#
+# Sobrescreva as variáveis de ambiente DB_URL / DB_USER / DB_PASSWORD conforme
+# o ambiente. Os valores abaixo são apenas um default local de desenvolvimento.
+
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/revisalab?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:}
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      # Sem H2 quando o profile MySQL está ativo.
+      enabled: false

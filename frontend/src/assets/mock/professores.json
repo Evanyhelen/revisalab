@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "nome": "Maria Silva",
+    "email": "maria.silva@escola.ma.gov.br",
+    "senha": "123456",
+    "disciplina": "Matemática",
+    "escola": "Escola Municipal João Paulo II",
+    "regiao": "Cohab Anil",
+    "dataCadastro": "2024-01-15"
+  },
+  {
+    "id": 2,
+    "nome": "João Santos",
+    "email": "joao.santos@escola.ma.gov.br",
+    "senha": "123456",
+    "disciplina": "Português",
+    "escola": "Escola Municipal Prof. Carlos",
+    "regiao": "Turu",
+    "dataCadastro": "2024-02-20"
+  },
+  {
+    "id": 3,
+    "nome": "Ana Costa",
+    "email": "ana.costa@escola.ma.gov.br",
+    "senha": "123456",
+    "disciplina": "Ciências",
+    "escola": "Escola Municipal São Francisco",
+    "regiao": "Coroado",
+    "dataCadastro": "2024-03-10"
+  }
+]

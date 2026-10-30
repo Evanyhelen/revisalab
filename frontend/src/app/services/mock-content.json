@@ -1,0 +1,28 @@
+[
+  {
+    "id": "1",
+    "title": "Introdução à Programação",
+    "description": "Material completo sobre conceitos básicos de programação com exemplos práticos",
+    "category": "Tecnologia",
+    "fileType": "PDF",
+    "fileName": "intro-programacao.pdf",
+    "fileSize": 2048000,
+    "tags": ["programação", "iniciantes", "lógica"],
+    "uploadDate": "2024-01-15T00:00:00.000Z",
+    "author": "Prof. João Silva",
+    "type": "document"
+  },
+  {
+    "id": "2",
+    "title": "Matemática Básica - Operações",
+    "description": "Exercícios e explicações sobre operações matemáticas fundamentais",
+    "category": "Matemática",
+    "fileType": "Video",
+    "fileName": "matematica-basica.mp4",
+    "fileSize": 15728640,
+    "tags": ["matemática", "operações", "básico"],
+    "uploadDate": "2024-01-20T00:00:00.000Z",
+    "author": "Prof. Maria Santos",
+    "type": "video"
+  }
+]

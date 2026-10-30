@@ -1,0 +1,244 @@
+<div class="page-with-sidebar">
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.collapsed]="!sidebarOpen">
+    <div class="sidebar-brand">
+      <span class="brand-emoji">📖</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-item" routerLink="/dashboard" routerLinkActive="active">
+        <mat-icon>grid_view</mat-icon>
+        <span>Início</span>
+      </a>
+      <a class="sidebar-item" routerLink="/trilhas" routerLinkActive="active">
+        <mat-icon>route</mat-icon>
+        <span>Trilhas</span>
+      </a>
+      <a class="sidebar-item" routerLink="/praticar" routerLinkActive="active">
+        <mat-icon>sports_esports</mat-icon>
+        <span>Praticar</span>
+      </a>
+      <a class="sidebar-item" routerLink="/conquistas" routerLinkActive="active">
+        <mat-icon>military_tech</mat-icon>
+        <span>Conquistas</span>
+      </a>
+      <a class="sidebar-item" routerLink="/ranking" routerLinkActive="active">
+        <mat-icon>leaderboard</mat-icon>
+        <span>Ranking</span>
+      </a>
+      <a class="sidebar-item" routerLink="/chat" routerLinkActive="active">
+        <mat-icon>smart_toy</mat-icon>
+        <span>Chat IA</span>
+      </a>
+      <a class="sidebar-item" routerLink="/missoes" routerLinkActive="active">
+        <mat-icon>assignment</mat-icon>
+        <span>Missões do Dia</span>
+      </a>
+      <a class="sidebar-item" routerLink="/construtor-base" routerLinkActive="active">
+        <mat-icon>apartment</mat-icon>
+        <span>Construtor de Base</span>
+      </a>
+      <a class="sidebar-item" routerLink="/fundamentacao" routerLinkActive="active">
+        <mat-icon>menu_book</mat-icon>
+        <span>Fundamentação</span>
+      </a>
+      <a class="sidebar-item" routerLink="/impacto" routerLinkActive="active">
+        <mat-icon>insights</mat-icon>
+        <span>Impacto</span>
+      </a>
+      <a class="sidebar-item" routerLink="/sobre" routerLinkActive="active">
+        <mat-icon>info</mat-icon>
+        <span>Sobre o Projeto</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button class="sidebar-toggle-btn" (click)="toggleSidebar()">
+        <mat-icon>{{ sidebarOpen ? 'chevron_left' : 'chevron_right' }}</mat-icon>
+        <span>{{ sidebarOpen ? 'Recolher' : 'Expandir' }}</span>
+      </button>
+    </div>
+  </aside>
+  
+<div class="trilhas-page">
+  <!-- Header da página -->
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div>
+        <h1 class="page-title">📚 Trilhas de Aprendizagem</h1>
+        <p class="page-sub">Escolha uma área para começar sua jornada de nivelamento</p>
+      </div>
+      <div class="header-search">
+        <mat-icon>search</mat-icon>
+        <input type="text" placeholder="Buscar trilha..." [(ngModel)]="searchText" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Filtros por área - Carrossel -->
+  <div class="filters-section">
+    <button class="carousel-nav-btn" aria-label="Rolar filtros para a esquerda" (click)="scrollFilters('left')" [disabled]="filterCarouselIndex === 0">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    
+    <div class="filters-carousel">
+      <div class="filters-track" [style.transform]="'translateX(-' + (filterCarouselIndex * 140) + 'px)'">
+        <button class="filter-btn" [class.active]="activeArea === 'all'" (click)="setArea('all')">
+          <mat-icon>public</mat-icon>
+          <span>Todas</span>
+        </button>
+        <button class="filter-btn" *ngFor="let area of areas" [class.active]="activeArea === area.id" (click)="setArea(area.id)">
+          <mat-icon>{{ area.icon }}</mat-icon>
+          <span>{{ area.name }}</span>
+        </button>
+      </div>
+    </div>
+    
+    <button class="carousel-nav-btn" aria-label="Rolar filtros para a direita" (click)="scrollFilters('right')" [disabled]="filterCarouselIndex >= maxFilterIndex">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
+
+  <!-- Aviso de catálogo indisponível (fallback de demonstração) -->
+  <div class="trails-info-banner" *ngIf="loadError && !loading" role="status">
+    <mat-icon>cloud_off</mat-icon>
+    <span>Exibindo catálogo de demonstração — não foi possível carregar as trilhas do servidor.</span>
+  </div>
+
+  <!-- Loading -->
+  <div class="trilhas-loading" *ngIf="loading" role="status" aria-live="polite">
+    <mat-icon class="spin">autorenew</mat-icon>
+    <span>Carregando trilhas...</span>
+  </div>
+
+  <!-- Grid de trilhas -->
+  <div class="trilhas-grid" *ngIf="!loading">
+    <div class="trilha-card" *ngFor="let trail of filteredTrails">
+      <div class="trail-card-header" [style.background]="trail.gradient">
+        <div class="trail-emoji">{{ trail.icon }}</div>
+        <div class="trail-area-tag">{{ trail.area }}</div>
+      </div>
+      <div class="trail-card-body">
+        <h3 class="trail-title">{{ trail.name }}</h3>
+        <p class="trail-desc">{{ trail.description }}</p>
+        <div class="trail-meta-row">
+          <span class="trail-meta-item">⚡ {{ trail.totalXp }} XP</span>
+          <span class="trail-meta-item">📝 {{ trail.questions }} questões</span>
+          <span class="trail-meta-item">⏱️ {{ trail.hours }}h estimadas</span>
+        </div>
+        <div class="trail-progress-section" *ngIf="trail.progress > 0">
+          <div class="progress-info">
+            <span>Progresso</span>
+            <span class="progress-pct">{{ trail.progress }}%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" [style.width]="trail.progress + '%'"></div>
+          </div>
+        </div>
+        <div class="trail-actions">
+          <button class="btn-continue" *ngIf="trail.progress > 0" (click)="openTrail(trail)">
+            <mat-icon>play_arrow</mat-icon>
+            Continuar
+          </button>
+          <button class="btn-start" *ngIf="trail.progress === 0" (click)="openTrail(trail)">
+            <mat-icon>rocket_launch</mat-icon>
+            Iniciar Trilha
+          </button>
+          <span class="trail-modules">{{ trail.modules }} módulos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sem resultados -->
+  <div class="trilhas-empty" *ngIf="!loading && filteredTrails.length === 0">
+    <mat-icon>search_off</mat-icon>
+    <p>Nenhuma trilha encontrada para os filtros selecionados.</p>
+    <button class="btn-clear-filters" *ngIf="hasActiveFilters" (click)="clearFilters()">
+      <mat-icon>filter_alt_off</mat-icon>
+      Limpar filtros
+    </button>
+  </div>
+</div>
+
+  <!-- Modal: material de estudo da trilha (Wikipedia + YouTube) -->
+  <div class="trail-modal-overlay" *ngIf="activeTrail as trail" (click)="closeTrail()">
+    <div class="trail-modal" (click)="$event.stopPropagation()">
+      <button class="trail-modal-close" (click)="closeTrail()" aria-label="Fechar">
+        <mat-icon>close</mat-icon>
+      </button>
+
+      <div class="trail-modal-scroll">
+      <div class="trail-modal-header" [style.background]="trail.gradient">
+        <div class="trail-modal-emoji">{{ trail.icon }}</div>
+        <h2>{{ trail.name }}</h2>
+        <p>{{ trail.description }}</p>
+      </div>
+
+      <div class="trail-modal-body">
+        <!-- Etapas estruturadas da trilha (módulos) com a etapa atual destacada -->
+        <section class="trail-steps" *ngIf="trailDetail && trailDetail.modules.length > 0">
+          <h3>Etapas da trilha</h3>
+          <ol class="trail-steps-list">
+            <li *ngFor="let m of trailDetail.modules"
+                [class.completed]="m.completed"
+                [class.current]="isCurrentStep(m.orderNumber)"
+                (click)="selectModule(m)"
+                (keydown.enter)="selectModule(m)"
+                role="button"
+                tabindex="0">
+              <mat-icon>{{ m.completed ? 'check_circle' : (isCurrentStep(m.orderNumber) ? 'play_circle' : 'radio_button_unchecked') }}</mat-icon>
+              <span>{{ m.title }}</span>
+            </li>
+          </ol>
+        </section>
+
+        <div class="trail-modal-loading" *ngIf="resourcesLoading">
+          <mat-icon class="spin">autorenew</mat-icon>
+          Carregando material de estudo...
+        </div>
+
+        <div class="trail-modal-error" *ngIf="resourcesError && !resourcesLoading">
+          Não foi possível carregar o material externo agora. Você ainda pode praticar com questões reais do ENEM abaixo.
+        </div>
+
+        <ng-container *ngIf="!resourcesLoading && !resourcesError">
+          <section class="trail-resource" *ngIf="video as vid">
+            <h3>📹 Aula em vídeo</h3>
+            <iframe *ngIf="vid.embedUrl" class="trail-video-frame" [src]="safeEmbedUrl(vid.embedUrl)" title="Aula em vídeo" allowfullscreen></iframe>
+            <a *ngIf="!vid.embedUrl" class="trail-video-link" [href]="vid.watchUrl" target="_blank" rel="noopener">
+              <mat-icon>smart_display</mat-icon>
+              Ver aulas sobre {{ vid.title || trail.area }} no YouTube
+            </a>
+          </section>
+
+          <section class="trail-resource" *ngIf="article as art">
+            <h3>📚 Conteúdo teórico</h3>
+            <div class="trail-article">
+              <img *ngIf="art.thumbnail" [src]="art.thumbnail.source" alt="" />
+              <div class="trail-article-text">
+                <strong>{{ art.title }}</strong>
+                <p *ngIf="art.description">{{ art.description }}</p>
+                <p class="trail-article-extract" *ngIf="art.extract">{{ art.extract }}</p>
+                <a *ngIf="art.url" [href]="art.url" target="_blank" rel="noopener">Ler artigo completo na Wikipédia ↗</a>
+              </div>
+            </div>
+          </section>
+
+          <section class="trail-resource" *ngIf="extras as ex">
+            <h3>🗂️ {{ ex.title }}</h3>
+            <ul class="trail-extras">
+              <li *ngFor="let item of ex.items">{{ item }}</li>
+            </ul>
+          </section>
+        </ng-container>
+
+        <button class="trail-modal-start" (click)="startPractice(trail)">
+          <mat-icon>rocket_launch</mat-icon>
+          {{ practiceButtonLabel }}
+        </button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

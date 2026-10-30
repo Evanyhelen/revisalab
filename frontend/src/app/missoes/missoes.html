@@ -1,0 +1,240 @@
+<div class="page-with-sidebar">
+  <aside class="sidebar" [class.collapsed]="!sidebarOpen">
+    <div class="sidebar-brand">
+      <span class="brand-emoji">📖</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-item" routerLink="/dashboard" routerLinkActive="active">
+        <mat-icon>grid_view</mat-icon>
+        <span>Início</span>
+      </a>
+      <a class="sidebar-item" routerLink="/trilhas" routerLinkActive="active">
+        <mat-icon>route</mat-icon>
+        <span>Trilhas</span>
+      </a>
+      <a class="sidebar-item" routerLink="/praticar" routerLinkActive="active">
+        <mat-icon>sports_esports</mat-icon>
+        <span>Praticar</span>
+      </a>
+      <a class="sidebar-item" routerLink="/conquistas" routerLinkActive="active">
+        <mat-icon>military_tech</mat-icon>
+        <span>Conquistas</span>
+      </a>
+      <a class="sidebar-item" routerLink="/ranking" routerLinkActive="active">
+        <mat-icon>leaderboard</mat-icon>
+        <span>Ranking</span>
+      </a>
+      <a class="sidebar-item" routerLink="/chat" routerLinkActive="active">
+        <mat-icon>smart_toy</mat-icon>
+        <span>Chat IA</span>
+      </a>
+      <a class="sidebar-item" routerLink="/missoes" routerLinkActive="active">
+        <mat-icon>assignment</mat-icon>
+        <span>Missões do Dia</span>
+      </a>
+      <a class="sidebar-item" routerLink="/construtor-base" routerLinkActive="active">
+        <mat-icon>apartment</mat-icon>
+        <span>Construtor de Base</span>
+      </a>
+      <a class="sidebar-item" routerLink="/fundamentacao" routerLinkActive="active">
+        <mat-icon>menu_book</mat-icon>
+        <span>Fundamentação</span>
+      </a>
+      <a class="sidebar-item" routerLink="/impacto" routerLinkActive="active">
+        <mat-icon>insights</mat-icon>
+        <span>Impacto</span>
+      </a>
+      <a class="sidebar-item" routerLink="/sobre" routerLinkActive="active">
+        <mat-icon>info</mat-icon>
+        <span>Sobre o Projeto</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button class="sidebar-toggle-btn" (click)="toggleSidebar()">
+        <mat-icon>{{ sidebarOpen ? 'chevron_left' : 'chevron_right' }}</mat-icon>
+        <span>{{ sidebarOpen ? 'Recolher' : 'Expandir' }}</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="missoes-container">
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-icon-circle">
+      <mat-icon>assignment</mat-icon>
+    </div>
+    <div class="header-content">
+      <h1 class="page-title">Missões do Dia</h1>
+      <p class="page-subtitle">Complete suas missões diárias e ganhe XP</p>
+    </div>
+  </div>
+
+  <!-- Progress Summary -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon-wrapper" style="background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);">
+        <mat-icon>check_circle</mat-icon>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">{{ completedMissions }}/{{ missions.length }}</div>
+        <div class="stat-label">Missões Concluídas</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon-wrapper" style="background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);">
+        <mat-icon>stars</mat-icon>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">{{ totalXP }} XP</div>
+        <div class="stat-label">XP Ganho Hoje</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon-wrapper" style="background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 100%);">
+        <mat-icon>trending_up</mat-icon>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">{{ progressPercentage.toFixed(0) }}%</div>
+        <div class="stat-label">Progresso Diário</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress Bar -->
+  <mat-card class="progress-card">
+    <div class="progress-header">
+      <span class="progress-text">Progresso do Dia</span>
+      <span class="progress-percentage">{{ progressPercentage.toFixed(0) }}%</span>
+    </div>
+    <div class="progress-bar-container">
+      <div class="progress-bar">
+        <div class="progress-fill" [style.width]="progressPercentage + '%'"></div>
+      </div>
+    </div>
+  </mat-card>
+
+  <!-- Missions List -->
+  <mat-card class="missions-card">
+    <div class="card-header">
+      <mat-icon class="header-icon">assignment</mat-icon>
+      <h2>Suas Missões</h2>
+      <button mat-button class="new-mission-btn" (click)="showPersonalForm = !showPersonalForm">
+        <mat-icon>{{ showPersonalForm ? 'close' : 'add' }}</mat-icon>
+        {{ showPersonalForm ? 'Fechar' : 'Nova missão pessoal' }}
+      </button>
+    </div>
+
+    <!-- Formulário de missão pessoal -->
+    <div class="personal-form" *ngIf="showPersonalForm">
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="form-field full">
+          <mat-label>Título da missão</mat-label>
+          <input matInput [(ngModel)]="personalForm.title" maxlength="100" placeholder="Ex.: Resolver 20 exercícios hoje" />
+        </mat-form-field>
+      </div>
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="form-field full">
+          <mat-label>Descrição (opcional)</mat-label>
+          <textarea matInput [(ngModel)]="personalForm.description" maxlength="300" rows="2" placeholder="Detalhe o objetivo da sua missão"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Periodicidade</mat-label>
+          <mat-select [(ngModel)]="personalForm.type">
+            <mat-option value="daily">Diária</mat-option>
+            <mat-option value="weekly">Semanal</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Tipo de meta</mat-label>
+          <mat-select [(ngModel)]="personalForm.actionType">
+            <mat-option value="complete_exercises">Exercícios concluídos</mat-option>
+            <mat-option value="study_minutes">Minutos de estudo</mat-option>
+            <mat-option value="streak">Estudar hoje</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Meta</mat-label>
+          <input matInput type="number" min="1" max="500" [(ngModel)]="personalForm.requiredValue" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Recompensa (XP)</mat-label>
+          <input matInput type="number" min="1" max="200" [(ngModel)]="personalForm.xpReward" />
+        </mat-form-field>
+      </div>
+      <div class="form-actions">
+        <button mat-raised-button color="primary" (click)="createPersonalMission()" [disabled]="creatingMission">
+          <mat-icon>{{ creatingMission ? 'hourglass_empty' : 'check' }}</mat-icon>
+          {{ creatingMission ? 'Criando...' : 'Criar missão' }}
+        </button>
+      </div>
+    </div>
+
+    <div class="card-content">
+      <div class="missions-list">
+        <div class="mission-item" 
+             *ngFor="let mission of missions" 
+             [class.completed]="mission.done"
+             (click)="toggleMission(mission)">
+          <div class="mission-checkbox">
+            <mat-checkbox
+              [checked]="mission.done"
+              (click)="$event.stopPropagation()"
+              (change)="toggleMission(mission)"
+              color="primary">
+            </mat-checkbox>
+          </div>
+          <div class="mission-icon-circle" [style.background]="getCategoryColor(mission.category)">
+            <mat-icon>{{ mission.icon }}</mat-icon>
+          </div>
+          <div class="mission-content">
+            <div class="mission-title">{{ mission.title }}</div>
+            <div class="mission-description">{{ mission.description }}</div>
+            <div class="mission-meta">
+              <span class="mission-category" [style.color]="getCategoryColor(mission.category)">
+                {{ mission.category }}
+              </span>
+              <span class="mission-personal" *ngIf="mission.personal">Pessoal</span>
+              <span class="mission-xp">+{{ mission.xp }} XP</span>
+            </div>
+          </div>
+          <button
+            *ngIf="mission.personal && !mission.done"
+            class="mission-delete"
+            mat-icon-button
+            aria-label="Remover missão pessoal"
+            (click)="deletePersonalMission(mission, $event)">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+          <div class="mission-status" *ngIf="mission.done">
+            <mat-icon class="check-icon">check_circle</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+  <!-- Tips Card -->
+  <mat-card class="tips-card">
+    <div class="card-header">
+      <mat-icon class="header-icon">lightbulb</mat-icon>
+      <h2>Dicas para Completar Missões</h2>
+    </div>
+    <div class="card-content">
+      <ul class="tips-list">
+        <li>Complete missões diariamente para manter seu streak ativo 🔥</li>
+        <li>Missões mais difíceis oferecem mais XP - desafie-se! 💪</li>
+        <li>Revise seus erros para fortalecer o aprendizado 📚</li>
+        <li>Estude em horários consistentes para criar um hábito ⏰</li>
+      </ul>
+    </div>
+  </mat-card>
+    </div>
+  </main>
+</div>

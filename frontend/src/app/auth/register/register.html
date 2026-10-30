@@ -1,0 +1,196 @@
+<div class="auth-container">
+  <!-- Left Side - Branding -->
+  <div class="auth-left">
+    <div class="branding">
+      <div class="logo">
+        <mat-icon class="logo-icon">school</mat-icon>
+        <h1 class="logo-text">RevisaLab</h1>
+      </div>
+      <h2 class="tagline">Comece sua jornada de nivelamento acadêmico</h2>
+      <p class="description">Junte-se a milhares de estudantes que estão fortalecendo suas bases para o sucesso universitário.</p>
+      
+      <div class="features">
+        <div class="feature">
+          <mat-icon>check_circle</mat-icon>
+          <span>Trilhas personalizadas por disciplina</span>
+        </div>
+        <div class="feature">
+          <mat-icon>check_circle</mat-icon>
+          <span>Gamificação e recompensas</span>
+        </div>
+        <div class="feature">
+          <mat-icon>check_circle</mat-icon>
+          <span>Acompanhamento de progresso</span>
+        </div>
+        <div class="feature">
+          <mat-icon>check_circle</mat-icon>
+          <span>100% gratuito</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Side - Form -->
+  <div class="auth-right">
+    <div class="form-container">
+      <div class="form-header">
+        <div class="logo-mobile">
+          <mat-icon>school</mat-icon>
+          <span>RevisaLab</span>
+        </div>
+        <h2>Criar Conta</h2>
+        <p>Preencha seus dados para começar</p>
+      </div>
+
+      <form (ngSubmit)="onSubmit()" #registerForm="ngForm" class="register-form">
+        
+        <!-- Campos diretos estilo login -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nome Completo</mat-label>
+          <input 
+            matInput 
+            type="text" 
+            [(ngModel)]="nome" 
+            name="nome"
+            placeholder="Digite seu nome completo"
+            required
+            (blur)="onFieldBlur('nome')"
+          />
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-error *ngIf="formErrors['nome'] && fieldTouched['nome']">
+            {{formErrors['nome']}}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input 
+            matInput 
+            type="email" 
+            [(ngModel)]="email" 
+            name="email"
+            placeholder="seu.email@exemplo.com"
+            required
+            (blur)="onFieldBlur('email')"
+          />
+          <mat-icon matSuffix>email</mat-icon>
+          <mat-error *ngIf="formErrors['email'] && fieldTouched['email']">
+            {{formErrors['email']}}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Curso</mat-label>
+          <mat-select [(ngModel)]="curso" name="curso" required (blur)="onFieldBlur('curso')">
+            <mat-option *ngFor="let c of cursos" [value]="c">
+              {{c}}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>school</mat-icon>
+          <mat-error *ngIf="formErrors['curso'] && fieldTouched['curso']">
+            {{formErrors['curso']}}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Semestre</mat-label>
+          <mat-select [(ngModel)]="semestre" name="semestre" required (blur)="onFieldBlur('semestre')">
+            <mat-option *ngFor="let s of semestres" [value]="s">
+              {{s}}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>calendar_today</mat-icon>
+          <mat-error *ngIf="formErrors['semestre'] && fieldTouched['semestre']">
+            {{formErrors['semestre']}}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Instituição</mat-label>
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="instituicao"
+            name="instituicao"
+            placeholder="Nome da sua universidade"
+            required
+            (blur)="onFieldBlur('instituicao')"
+          />
+          <mat-icon matSuffix>account_balance</mat-icon>
+          <mat-error *ngIf="formErrors['instituicao'] && fieldTouched['instituicao']">
+            {{formErrors['instituicao']}}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Senha</mat-label>
+          <input 
+            matInput 
+            [type]="hidePassword ? 'password' : 'text'" 
+            [(ngModel)]="senha" 
+            name="senha"
+            placeholder="Digite sua senha (mínimo 6 caracteres)"
+            required
+            (blur)="onFieldBlur('senha')"
+            (input)="onFieldInput('senha')"
+          />
+          <button 
+            mat-icon-button 
+            matSuffix 
+            type="button"
+            (click)="togglePasswordVisibility()"
+          >
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="formErrors['senha'] && fieldTouched['senha']">
+            {{formErrors['senha']}}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Confirmar Senha</mat-label>
+          <input 
+            matInput 
+            [type]="hideConfirmPassword ? 'password' : 'text'" 
+            [(ngModel)]="confirmarSenha" 
+            name="confirmarSenha"
+            placeholder="Confirme sua senha"
+            required
+            (blur)="onFieldBlur('confirmarSenha')"
+            (input)="onFieldInput('confirmarSenha')"
+          />
+          <button 
+            mat-icon-button 
+            matSuffix 
+            type="button"
+            (click)="toggleConfirmPasswordVisibility()"
+          >
+            <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="formErrors['confirmarSenha'] && fieldTouched['confirmarSenha']">
+            {{formErrors['confirmarSenha']}}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Submit Button -->
+        <button 
+          mat-raised-button 
+          color="primary" 
+          type="submit"
+          class="submit-btn"
+          [disabled]="isLoading"
+        >
+          <mat-icon *ngIf="!isLoading">person_add</mat-icon>
+          <span *ngIf="!isLoading">Criar Conta</span>
+          <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+          <span *ngIf="isLoading">Criando conta...</span>
+        </button>
+      </form>
+
+      <!-- Login Link -->
+      <div class="login-link-container">
+        <p>Já tem uma conta? <a (click)="navigateToLogin()" class="login-link">Fazer Login</a></p>
+      </div>
+    </div>
+  </div>
+</div>

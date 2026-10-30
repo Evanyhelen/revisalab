@@ -1,0 +1,281 @@
+<!-- ===================== HERO ===================== -->
+<section class="hero-section">
+  <div class="hero-bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div class="hero-content container">
+    <div class="hero-text">
+      <div class="hero-badge">
+        <span>🎓</span>
+        <span>Plataforma gamificada para graduandos</span>
+      </div>
+      <h1 class="hero-title">
+        Nivele sua base.<br>
+        <span class="hero-title-gradient">Acelere na graduação.</span>
+      </h1>
+      <p class="hero-sub">
+        Trilhas estruturadas, prática constante, feedback imediato e gamificação para você superar as lacunas do ensino médio e arrasar nas disciplinas iniciais da faculdade.
+      </p>
+      <div class="hero-cta">
+        <a class="cta-primary" routerLink="/auth/register">
+          Criar conta →
+        </a>
+        <a class="cta-secondary" routerLink="/auth/login">
+          Já tenho conta · Fazer Login
+        </a>
+      </div>
+      <div class="hero-benefits">
+        <div class="hero-benefit">⚡ Acesso imediato</div>
+        <div class="hero-benefit">🎯 Sem cartão de crédito</div>
+        <div class="hero-benefit">📈 Comece a evoluir hoje</div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card-float">
+        <div class="float-card xp-card">
+          <div class="xp-label">⚡ XP Ganho Hoje</div>
+          <div class="xp-num">+350 XP</div>
+          <div class="xp-bar-mini">
+            <div class="xp-fill" style="width: 72%"></div>
+          </div>
+          <div class="xp-meta">Nível 5 — 72% para o Nível 6</div>
+        </div>
+        <div class="float-card streak-card">
+          <div class="streak-fire">🔥</div>
+          <div class="streak-num">12</div>
+          <div class="streak-label">dias de streak</div>
+        </div>
+        <div class="float-card badge-card">
+          <div class="badge-emoji">🏆</div>
+          <div class="badge-content">
+            <div class="badge-txt">Conquistado!</div>
+            <div class="badge-name">Explorador</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STATS ===================== -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">👥</div>
+        <div class="stat-value">78%</div>
+        <div class="stat-desc">dos vestibulandos têm renda até 1 salário mínimo</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📉</div>
+        <div class="stat-value">43%</div>
+        <div class="stat-desc">dos ingressantes reprovam em disciplinas iniciais no 1º semestre</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📚</div>
+        <div class="stat-value">100%</div>
+        <div class="stat-desc">focado em nivelamento e suporte à permanência estudantil</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⏰</div>
+        <div class="stat-value">24/7</div>
+        <div class="stat-desc">acesso à plataforma para estudar no seu ritmo</div>
+      </div>
+    </div>
+    <div class="stats-source">
+      <strong>Fonte:</strong> Ministério da Educação — Pesquisas sobre desigualdades educacionais (2023-2024)
+    </div>
+  </div>
+</section>
+
+<!-- ===================== COMO FUNCIONA ===================== -->
+<section class="how-section" id="como-funciona">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Como o RevisaLab funciona</h2>
+      <p class="section-sub">Três passos simples para transformar sua base acadêmica</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card" *ngFor="let step of steps; let i = index">
+        <div class="step-num">{{ step.num }}</div>
+        <div class="step-icon">{{ step.icon }}</div>
+        <h3 class="step-title">{{ step.title }}</h3>
+        <p class="step-desc">{{ step.desc }}</p>
+        <div class="step-connector" *ngIf="i < steps.length - 1">→</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ÁREAS ===================== -->
+<section class="areas-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Áreas de Estudo</h2>
+      <p class="section-sub">Conteúdos organizados para seu nivelamento completo</p>
+    </div>
+    <div class="areas-grid">
+      <div class="area-card" *ngFor="let area of areas">
+        <div class="area-emoji">{{ area.emoji }}</div>
+        <div class="area-name">{{ area.name }}</div>
+        <div class="area-count">{{ area.count }}</div>
+        <a class="area-btn" routerLink="/auth/register">Começar →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FEATURES ===================== -->
+<section class="features-section" id="funcionalidades">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Uma plataforma completa</h2>
+      <p class="section-sub">Tudo que você precisa para nivelar, praticar e evoluir</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card" *ngFor="let f of features">
+        <div class="feature-icon">{{ f.icon }}</div>
+        <h3 class="feature-title">{{ f.title }}</h3>
+        <p class="feature-desc">{{ f.desc }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GAMIFICAÇÃO ===================== -->
+<section class="gamif-section">
+  <div class="container">
+    <div class="gamif-inner">
+      <div class="gamif-text">
+        <div class="gamif-badge">🎮 Gamificação Educacional</div>
+        <h2 class="gamif-title">Estudar nunca foi tão motivante</h2>
+        <p class="gamif-sub">Mecanismos de jogos que transformam a revisão em uma experiência envolvente e recompensadora.</p>
+        <div class="gamif-items">
+          <div class="gamif-item">
+            <div class="gamif-item-icon">⚡</div>
+            <div>
+              <div class="gamif-item-title">XP e Níveis</div>
+              <div class="gamif-item-desc">Ganhe pontos a cada questão respondida e suba de nível</div>
+            </div>
+          </div>
+          <div class="gamif-item">
+            <div class="gamif-item-icon">🔥</div>
+            <div>
+              <div class="gamif-item-title">Streak Diário</div>
+              <div class="gamif-item-desc">Mantenha a sequência de dias estudando e ganhe bônus</div>
+            </div>
+          </div>
+          <div class="gamif-item">
+            <div class="gamif-item-icon">🏅</div>
+            <div>
+              <div class="gamif-item-title">Conquistas (Badges)</div>
+              <div class="gamif-item-desc">Desbloqueie medalhas ao atingir marcos importantes</div>
+            </div>
+          </div>
+          <div class="gamif-item">
+            <div class="gamif-item-icon">🏆</div>
+            <div>
+              <div class="gamif-item-title">Ranking Semanal</div>
+              <div class="gamif-item-desc">Compita amigavelmente com outros estudantes</div>
+            </div>
+          </div>
+        </div>
+        <a class="gamif-cta" routerLink="/auth/register">Quero começar agora →</a>
+      </div>
+      <div class="gamif-visual">
+        <div class="gamif-mockup">
+          <div class="mockup-header">
+            <div class="mockup-dot"></div>
+            <div class="mockup-title">Meu Progresso</div>
+          </div>
+          <div class="mockup-body">
+            <div class="mockup-user">
+              <div class="mockup-avatar">🎓</div>
+              <div>
+                <div class="mockup-name">Você</div>
+                <div class="mockup-level">Nível 5 — Estudante Avançado</div>
+              </div>
+            </div>
+            <div class="mockup-xp-bar">
+              <div class="mockup-xp-label">
+                <span>XP: 1.240</span>
+                <span>Próx. Nível: 1.500</span>
+              </div>
+              <div class="mockup-xp-track">
+                <div class="mockup-xp-fill"></div>
+              </div>
+            </div>
+            <div class="mockup-stats">
+              <div class="mockup-stat">
+                <div class="ms-val">🔥 12</div>
+                <div class="ms-lbl">Streak</div>
+              </div>
+              <div class="mockup-stat">
+                <div class="ms-val">🎯 87%</div>
+                <div class="ms-lbl">Acertos</div>
+              </div>
+              <div class="mockup-stat">
+                <div class="ms-val">🏅 7</div>
+                <div class="ms-lbl">Badges</div>
+              </div>
+            </div>
+            <div class="mockup-missions">
+              <div class="mission-item done">✅ Completar 5 questões hoje</div>
+              <div class="mission-item done">✅ Estudar por 30 minutos</div>
+              <div class="mission-item">⬜ Completar 1 lição de Matemática</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DEPOIMENTOS ===================== -->
+<section class="testimonials-section" id="depoimentos">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Quem está usando o RevisaLab</h2>
+      <p class="section-sub">Estudantes reais, resultados reais</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card" *ngFor="let t of testimonials">
+        <div class="testimonial-top">
+          <div class="testimonial-avatar">{{ t.emoji }}</div>
+          <div class="testimonial-info">
+            <div class="testimonial-name">{{ t.name }}</div>
+            <div class="testimonial-uni">{{ t.uni }}</div>
+            <div class="testimonial-year">{{ t.year }}</div>
+          </div>
+          <div class="quote-icon">❝</div>
+        </div>
+        <div class="stars">
+          <span *ngFor="let s of getStars(t.stars)">⭐</span>
+        </div>
+        <p class="testimonial-text">{{ t.text }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA FINAL ===================== -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="cta-icon-top">🚀</div>
+      <h2 class="cta-title">Comece agora e dê o primeiro passo para a graduação!</h2>
+      <p class="cta-sub">É rápido, fácil e 100% gratuito para começar.</p>
+      <div class="cta-buttons">
+        <a class="cta-main-btn" routerLink="/auth/register">Criar Conta →</a>
+        <a class="cta-sec-btn" routerLink="/auth/login">Já tenho conta · Fazer Login</a>
+      </div>
+      <div class="cta-points">
+        <div class="cta-point">⚡ Acesso Imediato</div>
+        <div class="cta-point">🎯 Sem Cartão de Crédito</div>
+        <div class="cta-point">📈 Comece a Evoluir Hoje</div>
+      </div>
+    </div>
+  </div>
+</section>

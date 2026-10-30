@@ -1,0 +1,253 @@
+<div class="page-with-sidebar">
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.collapsed]="!sidebarOpen">
+    <div class="sidebar-brand">
+      <span class="brand-emoji">📖</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-item" routerLink="/dashboard" routerLinkActive="active">
+        <mat-icon>grid_view</mat-icon>
+        <span>Início</span>
+      </a>
+      <a class="sidebar-item" routerLink="/trilhas" routerLinkActive="active">
+        <mat-icon>route</mat-icon>
+        <span>Trilhas</span>
+      </a>
+      <a class="sidebar-item" routerLink="/praticar" routerLinkActive="active">
+        <mat-icon>sports_esports</mat-icon>
+        <span>Praticar</span>
+      </a>
+      <a class="sidebar-item" routerLink="/conquistas" routerLinkActive="active">
+        <mat-icon>military_tech</mat-icon>
+        <span>Conquistas</span>
+      </a>
+      <a class="sidebar-item" routerLink="/ranking" routerLinkActive="active">
+        <mat-icon>leaderboard</mat-icon>
+        <span>Ranking</span>
+      </a>
+      <a class="sidebar-item" routerLink="/chat" routerLinkActive="active">
+        <mat-icon>smart_toy</mat-icon>
+        <span>Chat IA</span>
+      </a>
+      <a class="sidebar-item" routerLink="/missoes" routerLinkActive="active">
+        <mat-icon>assignment</mat-icon>
+        <span>Missões do Dia</span>
+      </a>
+      <a class="sidebar-item" routerLink="/construtor-base" routerLinkActive="active">
+        <mat-icon>apartment</mat-icon>
+        <span>Construtor de Base</span>
+      </a>
+      <a class="sidebar-item" routerLink="/fundamentacao" routerLinkActive="active">
+        <mat-icon>menu_book</mat-icon>
+        <span>Fundamentação</span>
+      </a>
+      <a class="sidebar-item" routerLink="/impacto" routerLinkActive="active">
+        <mat-icon>insights</mat-icon>
+        <span>Impacto</span>
+      </a>
+      <a class="sidebar-item" routerLink="/sobre" routerLinkActive="active">
+        <mat-icon>info</mat-icon>
+        <span>Sobre o Projeto</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button class="sidebar-toggle-btn" (click)="toggleSidebar()">
+        <mat-icon>{{ sidebarOpen ? 'chevron_left' : 'chevron_right' }}</mat-icon>
+        <span>{{ sidebarOpen ? 'Recolher' : 'Expandir' }}</span>
+      </button>
+    </div>
+  </aside>
+  
+<div class="quiz-page">
+  <!-- Header sessão quiz -->
+  <div class="quiz-header" *ngIf="!sessionActive">
+    <div class="header-icon-circle">
+      <mat-icon>sports_esports</mat-icon>
+    </div>
+    <div class="header-content">
+      <h1 class="page-title">Sessão de Prática</h1>
+      <p class="page-subtitle">Escolha uma área e comece a praticar</p>
+    </div>
+  </div>
+
+  <!-- Seletor de área (pré-sessão) -->
+  <div class="session-setup" *ngIf="!sessionActive">
+    <div class="setup-inner">
+      <!-- Search Filter -->
+      <div class="search-section">
+        <mat-icon class="search-icon">search</mat-icon>
+        <input 
+          type="text" 
+          class="search-input" 
+          placeholder="Pesquisar disciplina..."
+          [(ngModel)]="searchTerm"
+          (input)="filterAreas()"
+        />
+      </div>
+
+      <!-- Carousel Header -->
+      <div class="carousel-header">
+        <h2 class="setup-title">Escolha a Disciplina</h2>
+        <div class="carousel-controls">
+          <button class="carousel-btn" aria-label="Rolar disciplinas para a esquerda" (click)="scrollCarousel('left')" [disabled]="carouselIndex === 0">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+          <button class="carousel-btn" aria-label="Rolar disciplinas para a direita" (click)="scrollCarousel('right')" [disabled]="carouselIndex >= filteredAreas.length - carouselItemsVisible">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <!-- Carousel -->
+      <div class="carousel-container">
+        <div class="carousel-track" [style.transform]="'translateX(-' + (carouselIndex * carouselItemWidth) + 'px)'">
+          <div class="area-card" 
+               *ngFor="let area of filteredAreas"
+               [class.selected]="selectedArea === area.id"
+               (click)="selectArea(area.id)">
+            <div class="area-icon-circle" [style.background]="area.color">
+              <mat-icon>{{ area.icon }}</mat-icon>
+            </div>
+            <div class="area-name">{{ area.name }}</div>
+            <div class="area-check" *ngIf="selectedArea === area.id">
+              <mat-icon>check_circle</mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="setup-difficulty">
+        <label class="setup-label">Dificuldade</label>
+        <div class="difficulty-btns">
+          <button class="diff-btn" [class.active]="difficulty === 'easy'" (click)="difficulty = 'easy'">
+            🟢 Fácil
+          </button>
+          <button class="diff-btn" [class.active]="difficulty === 'medium'" (click)="difficulty = 'medium'">
+            🟡 Médio
+          </button>
+          <button class="diff-btn" [class.active]="difficulty === 'hard'" (click)="difficulty = 'hard'">
+            🔴 Difícil
+          </button>
+        </div>
+      </div>
+
+      <div class="setup-qty">
+        <label class="setup-label">Quantidade de questões</label>
+        <div class="qty-btns">
+          <button class="qty-btn" *ngFor="let q of [5, 10, 15, 20]"
+                  [class.active]="qty === q"
+                  (click)="qty = q">
+            {{ q }}
+          </button>
+        </div>
+      </div>
+
+      <button class="btn-start-session" (click)="startSession()" [disabled]="!selectedArea || loading">
+        <mat-icon>{{ loading ? 'hourglass_empty' : 'play_arrow' }}</mat-icon>
+        {{ loading ? (loadingMessage || 'Carregando...') : 'Iniciar Sessão' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Quiz Runner (sessão ativa) -->
+  <div class="quiz-runner" *ngIf="sessionActive && !sessionFinished">
+    <div class="runner-inner">
+      <!-- Progress bar da sessão -->
+      <div class="session-progress">
+        <div class="sp-info">
+          <span class="sp-count">Questão {{ currentIndex + 1 }} de {{ totalQuestions }}</span>
+          <div class="sp-xp">⚡ {{ earnedXp }} XP</div>
+        </div>
+        <div class="sp-bar">
+          <div class="sp-fill" [style.width]="((currentIndex) / totalQuestions * 100) + '%'"></div>
+        </div>
+        <div class="combo-pill" *ngIf="combo >= 3">
+          <span class="combo-fire">⚡</span>
+          <span>Combo x{{ combo }}!</span>
+        </div>
+      </div>
+
+      <!-- Questão atual -->
+      <div class="question-card" *ngIf="currentQuestion">
+        <div class="question-header">
+          <div class="question-area">{{ currentQuestion.areaIcon }} {{ currentQuestion.area }}</div>
+          <div class="question-difficulty" [class]="'diff-' + currentQuestion.difficulty">
+            {{ currentQuestion.difficulty === 'easy' ? '🟢 Fácil' : currentQuestion.difficulty === 'medium' ? '🟡 Médio' : '🔴 Difícil' }}
+          </div>
+        </div>
+
+        <p class="question-text">{{ currentQuestion.text }}</p>
+
+        <div class="options-grid">
+          <button class="option-btn" 
+                  *ngFor="let opt of currentQuestion.options; let i = index"
+                  [class.selected]="selectedOption === i"
+                  [class.correct]="answered && opt.correct"
+                  [class.wrong]="answered && selectedOption === i && !opt.correct"
+                  [disabled]="answered"
+                  (click)="selectOption(i)">
+            <span class="option-letter">{{ opt.id }}</span>
+            <span class="option-text">{{ opt.text }}</span>
+            <span class="option-result" *ngIf="answered && opt.correct">✓</span>
+            <span class="option-result wrong" *ngIf="answered && selectedOption === i && !opt.correct">✗</span>
+          </button>
+        </div>
+
+        <!-- Feedback após resposta -->
+        <div class="feedback-panel" *ngIf="answered">
+          <div class="feedback-result" [class.correct]="lastCorrect" [class.wrong]="!lastCorrect">
+            <div class="feedback-icon">{{ lastCorrect ? '✅' : '❌' }}</div>
+            <div class="feedback-msg">
+              {{ feedbackMessage }}
+            </div>
+          </div>
+          <div class="feedback-explanation">
+            <strong>Explicação:</strong> {{ currentQuestion.explanation }}
+          </div>
+          <button class="btn-next" (click)="nextQuestion()">
+            {{ currentIndex + 1 < totalQuestions ? 'Próxima →' : 'Ver Resultado →' }}
+          </button>
+        </div>
+
+        <button class="btn-confirm" *ngIf="!answered && selectedOption !== null" (click)="confirmAnswer()" [disabled]="submitting">
+          {{ submitting ? 'Verificando...' : 'Confirmar Resposta' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Resultado final -->
+  <div class="session-result" *ngIf="sessionFinished">
+    <div class="result-inner">
+      <div class="result-emoji">{{ accuracy >= 80 ? '🏆' : accuracy >= 60 ? '🎯' : '💪' }}</div>
+      <h2 class="result-title">Sessão Concluída!</h2>
+      <div class="result-stats">
+        <div class="result-stat">
+          <div class="rs-val">{{ correctAnswers }}/{{ totalQuestions }}</div>
+          <div class="rs-lbl">Acertos</div>
+        </div>
+        <div class="result-stat">
+          <div class="rs-val">{{ accuracy }}%</div>
+          <div class="rs-lbl">Taxa de Acerto</div>
+        </div>
+        <div class="result-stat xp-stat">
+          <div class="rs-val">+{{ earnedXp }}</div>
+          <div class="rs-lbl">XP Ganho</div>
+        </div>
+        <div class="result-stat">
+          <div class="rs-val">{{ maxCombo }}x</div>
+          <div class="rs-lbl">Melhor Combo</div>
+        </div>
+      </div>
+      <div class="result-actions">
+        <button class="btn-retry" (click)="restart()">
+          <mat-icon>replay</mat-icon> Nova Sessão
+        </button>
+        <a class="btn-trails" routerLink="/trilhas">Ver Trilhas</a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

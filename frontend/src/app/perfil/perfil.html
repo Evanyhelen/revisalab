@@ -1,0 +1,155 @@
+<div class="perfil-wrapper">
+  <!-- Header do Perfil -->
+  <div class="perfil-hero">
+    <div class="hero-content">
+      <div class="avatar-section">
+        <span class="avatar-large">{{ student.avatar }}</span>
+        <button mat-icon-button class="avatar-edit" matTooltip="Alterar avatar" (click)="changeAvatar()">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+      <div class="hero-info">
+        <h1 class="student-name">{{ student.name }}</h1>
+        <p class="student-meta">{{ student.course }} • {{ student.semester }}</p>
+        <p class="student-institution">🏫 {{ student.university }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grid de Informações -->
+  <div class="perfil-grid">
+    
+    <!-- Dados Pessoais -->
+    <mat-card class="perfil-card info-card">
+      <mat-card-header>
+        <div class="card-header-content">
+          <div class="header-left">
+            <mat-icon class="header-icon">person</mat-icon>
+            <div>
+              <mat-card-title>Dados Pessoais</mat-card-title>
+              <mat-card-subtitle>Informações da sua conta</mat-card-subtitle>
+            </div>
+          </div>
+          <button mat-stroked-button color="primary" (click)="editMode = !editMode">
+            <mat-icon>{{ editMode ? 'close' : 'edit' }}</mat-icon>
+            {{ editMode ? 'Cancelar' : 'Editar' }}
+          </button>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="info-list">
+          <div class="info-row">
+            <div class="info-label">
+              <mat-icon>badge</mat-icon>
+              <span>Nome Completo</span>
+            </div>
+            <div class="info-value">
+              <p *ngIf="!editMode">{{ student.name }}</p>
+              <input *ngIf="editMode" type="text" [(ngModel)]="student.name" class="edit-input" />
+            </div>
+          </div>
+          
+          <div class="info-row">
+            <div class="info-label">
+              <mat-icon>email</mat-icon>
+              <span>E-mail</span>
+            </div>
+            <div class="info-value">
+              <p>{{ student.email }}</p>
+            </div>
+          </div>
+          
+          <div class="info-row">
+            <div class="info-label">
+              <mat-icon>school</mat-icon>
+              <span>Curso</span>
+            </div>
+            <div class="info-value">
+              <p *ngIf="!editMode">{{ student.course }}</p>
+              <input *ngIf="editMode" type="text" [(ngModel)]="student.course" class="edit-input" />
+            </div>
+          </div>
+          
+          <div class="info-row">
+            <div class="info-label">
+              <mat-icon>calendar_today</mat-icon>
+              <span>Semestre</span>
+            </div>
+            <div class="info-value">
+              <p *ngIf="!editMode">{{ student.semester }}</p>
+              <input *ngIf="editMode" type="text" [(ngModel)]="student.semester" class="edit-input" />
+            </div>
+          </div>
+          
+          <div class="info-row">
+            <div class="info-label">
+              <mat-icon>location_city</mat-icon>
+              <span>Instituição</span>
+            </div>
+            <div class="info-value">
+              <p *ngIf="!editMode">{{ student.university }}</p>
+              <input *ngIf="editMode" type="text" [(ngModel)]="student.university" class="edit-input" />
+            </div>
+          </div>
+        </div>
+        
+        <div class="action-buttons" *ngIf="editMode">
+          <button mat-raised-button color="primary" (click)="saveProfile()">
+            <mat-icon>save</mat-icon>
+            Salvar Alterações
+          </button>
+          <button mat-button (click)="editMode = false">Cancelar</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Estatísticas -->
+    <mat-card class="perfil-card stats-card">
+      <mat-card-header>
+        <div class="card-header-content">
+          <div class="header-left">
+            <mat-icon class="header-icon">insights</mat-icon>
+            <div>
+              <mat-card-title>Estatísticas</mat-card-title>
+              <mat-card-subtitle>Seu progresso no RevisaLab</mat-card-subtitle>
+            </div>
+          </div>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);">
+              <mat-icon>bolt</mat-icon>
+            </div>
+            <div class="stat-info">
+              <p class="stat-value">{{ student.xp }}</p>
+              <p class="stat-label">XP Total</p>
+            </div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #1e3a8a 0%, #0ea5e9 100%);">
+              <mat-icon>trending_up</mat-icon>
+            </div>
+            <div class="stat-info">
+              <p class="stat-value">{{ student.level }}</p>
+              <p class="stat-label">Nível</p>
+            </div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #dc2626 0%, #f97316 100%);">
+              <mat-icon>local_fire_department</mat-icon>
+            </div>
+            <div class="stat-info">
+              <p class="stat-value">{{ student.streak }}</p>
+              <p class="stat-label">Dias de Streak</p>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>

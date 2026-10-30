@@ -1,0 +1,188 @@
+<div class="page-with-sidebar">
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.collapsed]="!sidebarOpen">
+    <div class="sidebar-brand">
+      <span class="brand-emoji">📖</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-item" routerLink="/dashboard" routerLinkActive="active">
+        <mat-icon>grid_view</mat-icon>
+        <span>Início</span>
+      </a>
+      <a class="sidebar-item" routerLink="/trilhas" routerLinkActive="active">
+        <mat-icon>route</mat-icon>
+        <span>Trilhas</span>
+      </a>
+      <a class="sidebar-item" routerLink="/praticar" routerLinkActive="active">
+        <mat-icon>sports_esports</mat-icon>
+        <span>Praticar</span>
+      </a>
+      <a class="sidebar-item" routerLink="/conquistas" routerLinkActive="active">
+        <mat-icon>military_tech</mat-icon>
+        <span>Conquistas</span>
+      </a>
+      <a class="sidebar-item" routerLink="/ranking" routerLinkActive="active">
+        <mat-icon>leaderboard</mat-icon>
+        <span>Ranking</span>
+      </a>
+      <a class="sidebar-item" routerLink="/chat" routerLinkActive="active">
+        <mat-icon>smart_toy</mat-icon>
+        <span>Chat IA</span>
+      </a>
+      <a class="sidebar-item" routerLink="/missoes" routerLinkActive="active">
+        <mat-icon>assignment</mat-icon>
+        <span>Missões do Dia</span>
+      </a>
+      <a class="sidebar-item" routerLink="/construtor-base" routerLinkActive="active">
+        <mat-icon>apartment</mat-icon>
+        <span>Construtor de Base</span>
+      </a>
+      <a class="sidebar-item" routerLink="/fundamentacao" routerLinkActive="active">
+        <mat-icon>menu_book</mat-icon>
+        <span>Fundamentação</span>
+      </a>
+      <a class="sidebar-item" routerLink="/impacto" routerLinkActive="active">
+        <mat-icon>insights</mat-icon>
+        <span>Impacto</span>
+      </a>
+      <a class="sidebar-item" routerLink="/sobre" routerLinkActive="active">
+        <mat-icon>info</mat-icon>
+        <span>Sobre o Projeto</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button class="sidebar-toggle-btn" (click)="toggleSidebar()">
+        <mat-icon>{{ sidebarOpen ? 'chevron_left' : 'chevron_right' }}</mat-icon>
+        <span>{{ sidebarOpen ? 'Recolher' : 'Expandir' }}</span>
+      </button>
+    </div>
+  </aside>
+  
+<div class="ranking-container">
+  <!-- Header -->
+  <div class="ranking-header">
+    <div class="header-icon-circle">
+      <mat-icon>emoji_events</mat-icon>
+    </div>
+    <div class="header-content">
+      <h1 class="page-title">Ranking de Estudantes</h1>
+      <p class="page-subtitle">Compete com outros estudantes e suba no ranking!</p>
+    </div>
+  </div>
+
+  <!-- Period Selector -->
+  <div class="period-selector">
+    <button 
+      class="period-btn" 
+      [class.active]="selectedPeriod === 'semanal'"
+      (click)="selectPeriod('semanal')">
+      <mat-icon>calendar_today</mat-icon>
+      <span>Semanal</span>
+    </button>
+    <button 
+      class="period-btn" 
+      [class.active]="selectedPeriod === 'mensal'"
+      (click)="selectPeriod('mensal')">
+      <mat-icon>calendar_month</mat-icon>
+      <span>Mensal</span>
+    </button>
+    <button 
+      class="period-btn" 
+      [class.active]="selectedPeriod === 'geral'"
+      (click)="selectPeriod('geral')">
+      <mat-icon>emoji_events</mat-icon>
+      <span>Geral</span>
+    </button>
+  </div>
+
+  <!-- User Position Card -->
+  <mat-card class="user-position-card">
+    <div class="user-position-content">
+      <div class="position-badge">
+        <span class="position-number">#{{ userPosition.position }}</span>
+      </div>
+      <div class="user-avatar">{{ userPosition.avatar }}</div>
+      <div class="user-info">
+        <h3>{{ userPosition.name }}</h3>
+        <div class="user-stats">
+          <span class="stat">
+            <mat-icon>stars</mat-icon>
+            Nível {{ userPosition.level }}
+          </span>
+          <span class="stat">
+            <mat-icon>bolt</mat-icon>
+            {{ userPosition.xp }} XP
+          </span>
+          <span class="stat">
+            <mat-icon>local_fire_department</mat-icon>
+            {{ userPosition.streak }} dias
+          </span>
+          <span class="stat">
+            <mat-icon>military_tech</mat-icon>
+            {{ userPosition.badges }} badges
+          </span>
+        </div>
+      </div>
+      <div class="motivation-text">
+        <p>Continue estudando para subir no ranking! 🚀</p>
+      </div>
+    </div>
+  </mat-card>
+
+  <!-- Ranking List -->
+  <div class="ranking-list">
+    <mat-card class="ranking-card" *ngFor="let user of currentRanking" [class]="getMedalClass(user.position)">
+      <div class="ranking-item">
+        <div class="position">
+          <span class="medal" *ngIf="user.position <= 3">{{ getMedalIcon(user.position) }}</span>
+          <span class="position-number" *ngIf="user.position > 3">#{{ user.position }}</span>
+        </div>
+        
+        <div class="user-avatar">{{ user.avatar }}</div>
+        
+        <div class="user-details">
+          <h3 class="user-name">{{ user.name }}</h3>
+          <div class="user-level">
+            <mat-icon>stars</mat-icon>
+            <span>Nível {{ user.level }}</span>
+          </div>
+        </div>
+        
+        <div class="user-metrics">
+          <div class="metric">
+            <mat-icon>bolt</mat-icon>
+            <span class="metric-value">{{ user.xp }}</span>
+            <span class="metric-label">XP</span>
+          </div>
+          <div class="metric">
+            <mat-icon>local_fire_department</mat-icon>
+            <span class="metric-value">{{ user.streak }}</span>
+            <span class="metric-label">Streak</span>
+          </div>
+          <div class="metric">
+            <mat-icon>military_tech</mat-icon>
+            <span class="metric-value">{{ user.badges }}</span>
+            <span class="metric-label">Badges</span>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+
+  <!-- Info Card -->
+  <mat-card class="info-card">
+    <mat-icon class="info-icon">info</mat-icon>
+    <div class="info-content">
+      <h3>Como funciona o Ranking?</h3>
+      <ul>
+        <li><strong>Semanal:</strong> Resetado toda segunda-feira. Ganhe XP completando atividades durante a semana.</li>
+        <li><strong>Mensal:</strong> Resetado no primeiro dia de cada mês. Mostre sua consistência!</li>
+        <li><strong>Geral:</strong> Ranking acumulado desde o início. Os verdadeiros mestres aparecem aqui!</li>
+      </ul>
+      <p class="tip">💡 <strong>Dica:</strong> Mantenha seu streak diário para ganhar bônus de XP e subir mais rápido!</p>
+    </div>
+  </mat-card>
+</div>
+</div>

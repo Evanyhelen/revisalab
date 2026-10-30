@@ -1,0 +1,78 @@
+[
+  {
+    "id": 1,
+    "titulo": "Quiz de Matemática - Operações Básicas",
+    "disciplina": "Matemática",
+    "professorId": 1,
+    "dataCriacao": "2024-11-01",
+    "perguntas": [
+      {
+        "id": 1,
+        "pergunta": "Qual é o resultado de 15 + 27?",
+        "opcoes": ["40", "42", "44", "46"],
+        "respostaCorreta": 1,
+        "explicacao": "15 + 27 = 42"
+      },
+      {
+        "id": 2,
+        "pergunta": "Qual é o resultado de 8 × 7?",
+        "opcoes": ["54", "56", "58", "60"],
+        "respostaCorreta": 1,
+        "explicacao": "8 × 7 = 56"
+      },
+      {
+        "id": 3,
+        "pergunta": "Qual é o resultado de 96 ÷ 8?",
+        "opcoes": ["10", "11", "12", "13"],
+        "respostaCorreta": 2,
+        "explicacao": "96 ÷ 8 = 12"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "titulo": "Quiz de Português - Gramática",
+    "disciplina": "Português",
+    "professorId": 2,
+    "dataCriacao": "2024-11-05",
+    "perguntas": [
+      {
+        "id": 1,
+        "pergunta": "Qual é a classe gramatical da palavra 'rápido'?",
+        "opcoes": ["Substantivo", "Adjetivo", "Verbo", "Advérbio"],
+        "respostaCorreta": 1,
+        "explicacao": "'Rápido' é um adjetivo que qualifica um substantivo"
+      },
+      {
+        "id": 2,
+        "pergunta": "Complete: 'Eu _____ estudando para a prova.'",
+        "opcoes": ["estou", "estava", "estive", "esteja"],
+        "respostaCorreta": 0,
+        "explicacao": "'Estou' é a forma correta do verbo estar no presente"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "titulo": "Quiz de Ciências - Sistema Solar",
+    "disciplina": "Ciências",
+    "professorId": 3,
+    "dataCriacao": "2024-11-10",
+    "perguntas": [
+      {
+        "id": 1,
+        "pergunta": "Qual é o maior planeta do Sistema Solar?",
+        "opcoes": ["Saturno", "Júpiter", "Netuno", "Urano"],
+        "respostaCorreta": 1,
+        "explicacao": "Júpiter é o maior planeta do Sistema Solar"
+      },
+      {
+        "id": 2,
+        "pergunta": "Quantos planetas existem no Sistema Solar?",
+        "opcoes": ["7", "8", "9", "10"],
+        "respostaCorreta": 1,
+        "explicacao": "O Sistema Solar tem 8 planetas"
+      }
+    ]
+  }
+]

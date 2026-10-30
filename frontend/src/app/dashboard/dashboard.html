@@ -1,0 +1,223 @@
+<div class="dashboard-layout">
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.collapsed]="!sidebarOpen">
+    <div class="sidebar-brand">
+      <span class="brand-emoji">📖</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-item active" routerLink="/dashboard">
+        <mat-icon>grid_view</mat-icon>
+        <span>Início</span>
+      </a>
+      <a class="sidebar-item" routerLink="/trilhas">
+        <mat-icon>route</mat-icon>
+        <span>Trilhas</span>
+      </a>
+      <a class="sidebar-item" routerLink="/praticar">
+        <mat-icon>sports_esports</mat-icon>
+        <span>Praticar</span>
+      </a>
+      <a class="sidebar-item" routerLink="/conquistas">
+        <mat-icon>military_tech</mat-icon>
+        <span>Conquistas</span>
+      </a>
+      <a class="sidebar-item" routerLink="/ranking">
+        <mat-icon>leaderboard</mat-icon>
+        <span>Ranking</span>
+      </a>
+      <a class="sidebar-item" routerLink="/chat">
+        <mat-icon>smart_toy</mat-icon>
+        <span>Chat IA</span>
+      </a>
+      <a class="sidebar-item" routerLink="/missoes">
+        <mat-icon>assignment</mat-icon>
+        <span>Missões do Dia</span>
+      </a>
+      <a class="sidebar-item" routerLink="/construtor-base" routerLinkActive="active">
+        <mat-icon>apartment</mat-icon>
+        <span>Construtor de Base</span>
+      </a>
+      <a class="sidebar-item" routerLink="/fundamentacao">
+        <mat-icon>menu_book</mat-icon>
+        <span>Fundamentação</span>
+      </a>
+      <a class="sidebar-item" routerLink="/impacto">
+        <mat-icon>insights</mat-icon>
+        <span>Impacto</span>
+      </a>
+      <a class="sidebar-item" routerLink="/sobre">
+        <mat-icon>info</mat-icon>
+        <span>Sobre o Projeto</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button class="sidebar-toggle-btn" (click)="toggleSidebar()">
+        <mat-icon>{{ sidebarOpen ? 'chevron_left' : 'chevron_right' }}</mat-icon>
+        <span>{{ sidebarOpen ? 'Recolher' : 'Expandir' }}</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main class="dash-main">
+    <!-- Welcome Header -->
+    <div class="dash-header">
+      <div class="welcome-info">
+        <div class="welcome-avatar">🎓</div>
+        <div>
+          <h1 class="welcome-name">Olá, {{ userName }}! 👋</h1>
+          <p class="welcome-sub">Continue sua jornada de aprendizagem</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="streak-pill">
+          <span class="streak-fire">🔥</span>
+          <span><strong>{{ streak }}</strong> dias de streak</span>
+        </div>
+        <a class="btn-praticar" routerLink="/praticar">
+          <mat-icon>play_arrow</mat-icon>
+          Praticar agora
+        </a>
+      </div>
+    </div>
+
+    <!-- XP Card row -->
+    <div class="xp-row">
+      <div class="xp-card-big">
+        <div class="xp-card-left">
+          <div class="level-badge-big">
+            <span class="level-num">{{ level }}</span>
+            <span class="level-label">Nível</span>
+          </div>
+          <div class="xp-info">
+            <div class="xp-title">{{ levelTitle }}</div>
+            <div class="xp-current">{{ xp }} XP</div>
+            <div class="xp-next">Próximo nível: {{ nextLevelXp }} XP</div>
+          </div>
+        </div>
+        <div class="xp-card-right">
+          <div class="xp-bar-big">
+            <div class="xp-bar-fill" [style.width]="xpPercent + '%'"></div>
+          </div>
+          <div class="xp-pct">{{ xpPercent }}% para o Nível {{ level + 1 }}</div>
+        </div>
+      </div>
+
+      <div class="mini-stats-row">
+        <div class="mini-stat">
+          <div class="mini-stat-icon">🎯</div>
+          <div class="mini-stat-val">{{ questionsCount }}</div>
+          <div class="mini-stat-lbl">Questões</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat-icon">✅</div>
+          <div class="mini-stat-val">{{ accuracy }}</div>
+          <div class="mini-stat-lbl">Acertos</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat-icon">🏅</div>
+          <div class="mini-stat-val">{{ totalBadges }}</div>
+          <div class="mini-stat-lbl">Badges</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat-icon">⏱️</div>
+          <div class="mini-stat-val">{{ studyHours }}</div>
+          <div class="mini-stat-lbl">Estudo</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid de conteúdo -->
+    <div class="dash-grid">
+      <!-- Trilhas em andamento -->
+      <div class="dash-card trails-card">
+        <div class="card-header-bar">
+          <h2 class="card-title-h2">📚 Trilhas em Andamento</h2>
+          <a class="card-link" routerLink="/trilhas">Ver todas →</a>
+        </div>
+        <div class="trails-list">
+          <div class="trail-item" *ngFor="let trail of trails">
+            <div class="trail-icon-circle" [style.background]="trail.color">
+              <mat-icon>{{ trail.icon }}</mat-icon>
+            </div>
+            <div class="trail-info">
+              <div class="trail-name">{{ trail.name }}</div>
+              <div class="trail-progress-bar">
+                <div class="trail-fill" [style.width]="trail.progress + '%'"></div>
+              </div>
+              <div class="trail-meta">{{ trail.progress }}% concluído · {{ trail.nextLesson }}</div>
+            </div>
+            <a class="trail-continue" routerLink="/trilhas">
+              <mat-icon>play_arrow</mat-icon>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Missões do dia -->
+      <div class="dash-card missions-card">
+        <div class="card-header-bar">
+          <h2 class="card-title-h2">🎯 Missões do Dia</h2>
+          <a class="card-link" routerLink="/missoes">Ver todas →</a>
+        </div>
+        <div class="missions-list">
+          <div class="mission-item" *ngFor="let m of missions" [class.completed]="m.done">
+            <div class="mission-check">
+              <mat-icon>{{ m.done ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+            </div>
+            <div class="mission-info">
+              <div class="mission-name">{{ m.title }}</div>
+              <div class="mission-xp">+{{ m.xp }} XP</div>
+            </div>
+            <div class="mission-icon">{{ m.icon }}</div>
+          </div>
+        </div>
+        <div class="missions-progress">
+          <div class="missions-bar">
+            <div class="missions-fill" [style.width]="missionsPercentage + '%'"></div>
+          </div>
+          <span class="missions-pct">{{ missionsPercentage.toFixed(0) }}% das missões</span>
+        </div>
+      </div>
+
+      <!-- Ranking Semanal -->
+      <div class="dash-card ranking-card">
+        <div class="card-header-bar">
+          <h2 class="card-title-h2">🏆 Ranking Semanal</h2>
+          <a class="card-link" routerLink="/ranking">Ver completo →</a>
+        </div>
+        <div class="ranking-list">
+          <div class="rank-item" *ngFor="let r of ranking; let i = index" [class.my-rank]="r.isMe">
+            <div class="rank-pos" [class.top3]="i < 3">{{ i + 1 }}º</div>
+            <div class="rank-avatar">{{ r.emoji }}</div>
+            <div class="rank-info">
+              <div class="rank-name">{{ r.name }}</div>
+              <div class="rank-xp">{{ r.xp }} XP</div>
+            </div>
+            <div class="rank-medal" *ngIf="i === 0">🥇</div>
+            <div class="rank-medal" *ngIf="i === 1">🥈</div>
+            <div class="rank-medal" *ngIf="i === 2">🥉</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Conquistas recentes -->
+      <div class="dash-card badges-card">
+        <div class="card-header-bar">
+          <h2 class="card-title-h2">🏅 Conquistas Recentes</h2>
+          <a class="card-link" routerLink="/conquistas">Ver todas →</a>
+        </div>
+        <div class="badges-grid">
+          <div class="badge-item" *ngFor="let b of badgesRecent" [class.locked]="b.locked">
+            <div class="badge-icon">{{ b.icon }}</div>
+            <div class="badge-name">{{ b.name }}</div>
+            <div class="badge-status" *ngIf="!b.locked">✅</div>
+            <div class="badge-lock" *ngIf="b.locked">🔒</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

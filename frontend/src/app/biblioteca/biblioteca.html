@@ -1,0 +1,181 @@
+<div class="page-with-sidebar">
+  <aside class="sidebar" [class.collapsed]="!sidebarOpen">
+    <div class="sidebar-brand">
+      <span class="brand-emoji">📖</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-item" routerLink="/dashboard" routerLinkActive="active">
+        <mat-icon>grid_view</mat-icon>
+        <span>Início</span>
+      </a>
+      <a class="sidebar-item" routerLink="/trilhas" routerLinkActive="active">
+        <mat-icon>route</mat-icon>
+        <span>Trilhas</span>
+      </a>
+      <a class="sidebar-item" routerLink="/praticar" routerLinkActive="active">
+        <mat-icon>sports_esports</mat-icon>
+        <span>Praticar</span>
+      </a>
+      <a class="sidebar-item" routerLink="/conquistas" routerLinkActive="active">
+        <mat-icon>military_tech</mat-icon>
+        <span>Conquistas</span>
+      </a>
+      <a class="sidebar-item" routerLink="/ranking" routerLinkActive="active">
+        <mat-icon>leaderboard</mat-icon>
+        <span>Ranking</span>
+      </a>
+      <a class="sidebar-item" routerLink="/chat" routerLinkActive="active">
+        <mat-icon>smart_toy</mat-icon>
+        <span>Chat IA</span>
+      </a>
+      <a class="sidebar-item" routerLink="/missoes" routerLinkActive="active">
+        <mat-icon>assignment</mat-icon>
+        <span>Missões do Dia</span>
+      </a>
+      <a class="sidebar-item" routerLink="/construtor-base" routerLinkActive="active">
+        <mat-icon>apartment</mat-icon>
+        <span>Construtor de Base</span>
+      </a>
+      <a class="sidebar-item" routerLink="/fundamentacao" routerLinkActive="active">
+        <mat-icon>menu_book</mat-icon>
+        <span>Fundamentação</span>
+      </a>
+      <a class="sidebar-item" routerLink="/impacto" routerLinkActive="active">
+        <mat-icon>insights</mat-icon>
+        <span>Impacto</span>
+      </a>
+      <a class="sidebar-item" routerLink="/sobre" routerLinkActive="active">
+        <mat-icon>info</mat-icon>
+        <span>Sobre o Projeto</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button class="sidebar-toggle-btn" (click)="toggleSidebar()">
+        <mat-icon>{{ sidebarOpen ? 'chevron_left' : 'chevron_right' }}</mat-icon>
+        <span>{{ sidebarOpen ? 'Recolher' : 'Expandir' }}</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="conquistas-container">
+  <!-- Header -->
+  <div class="conquistas-header">
+    <h1 class="header-title">🏆 Minhas Conquistas</h1>
+    <p class="header-subtitle">{{ unlockedCount }} de {{ totalBadges }} badges desbloqueadas</p>
+  </div>
+
+  <!-- Progress Summary -->
+  <div class="progress-summary">
+    <div class="progress-bar-wrapper">
+      <div class="progress-info">
+        <span class="progress-label">Progresso Geral</span>
+        <span class="progress-value">{{ completionPercentage }}%</span>
+      </div>
+      <mat-progress-bar mode="determinate" [value]="completionPercentage"></mat-progress-bar>
+    </div>
+  </div>
+
+  <!-- Category Filter -->
+  <div class="category-filter">
+    <button 
+      class="category-btn" 
+      [class.active]="selectedCategory === 'todas'"
+      (click)="selectCategory('todas')">
+      Todas
+    </button>
+    <button 
+      class="category-btn" 
+      [class.active]="selectedCategory === 'aprendizado'"
+      (click)="selectCategory('aprendizado')">
+      Aprendizado
+    </button>
+    <button 
+      class="category-btn" 
+      [class.active]="selectedCategory === 'desempenho'"
+      (click)="selectCategory('desempenho')">
+      Desempenho
+    </button>
+    <button 
+      class="category-btn" 
+      [class.active]="selectedCategory === 'social'"
+      (click)="selectCategory('social')">
+      Social
+    </button>
+    <button 
+      class="category-btn" 
+      [class.active]="selectedCategory === 'especial'"
+      (click)="selectCategory('especial')">
+      Especial
+    </button>
+  </div>
+
+  <!-- Badges Grid -->
+  <div class="badges-grid">
+    <div 
+      *ngFor="let badge of filteredBadges" 
+      class="badge-card"
+      [class]="getRarityClass(badge.rarity)"
+      [class.unlocked]="badge.unlocked"
+      [class.locked]="!badge.unlocked">
+      
+      <div class="badge-icon-wrapper" [class.grayscale]="!badge.unlocked">
+        <span class="badge-icon">{{ badge.icon }}</span>
+      </div>
+
+      <div class="badge-info">
+        <h3 class="badge-name">{{ badge.name }}</h3>
+        <p class="badge-description">{{ badge.description }}</p>
+        <span class="badge-rarity" [style.color]="getRarityColor(badge.rarity)">{{ badge.rarity }}</span>
+      </div>
+
+      <!-- Progress Bar for Locked Badges -->
+      <div *ngIf="!badge.unlocked && badge.progress !== undefined" class="badge-progress">
+        <div class="progress-info">
+          <span class="progress-text">{{ badge.progress }}/{{ badge.maxProgress }}</span>
+          <span class="progress-percentage">{{ getProgressPercentage(badge) }}%</span>
+        </div>
+        <mat-progress-bar 
+          mode="determinate" 
+          [value]="getProgressPercentage(badge)">
+        </mat-progress-bar>
+      </div>
+
+      <!-- Unlock Date for Unlocked Badges -->
+      <div *ngIf="badge.unlocked && badge.unlockedAt" class="unlock-date">
+        Desbloqueada em {{ badge.unlockedAt | date:'dd/MM/yyyy' }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Info Card -->
+  <mat-card class="info-card">
+    <mat-icon class="info-icon">info</mat-icon>
+    <div class="info-content">
+      <h3>Sobre as Conquistas</h3>
+      <div class="rarity-legend">
+        <div class="legend-item">
+          <div class="legend-badge" style="background: #95a5a6;">Comum</div>
+          <span>Conquistas básicas e iniciais</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-badge" style="background: #3498db;">Raro</div>
+          <span>Requer dedicação e consistência</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-badge" style="background: #9b59b6;">Épico</div>
+          <span>Conquistas desafiadoras</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-badge" style="background: #f39c12;">Lendário</div>
+          <span>Apenas os melhores alcançam</span>
+        </div>
+      </div>
+      <p class="tip">💡 <strong>Dica:</strong> Continue estudando e praticando para desbloquear mais conquistas!</p>
+    </div>
+  </mat-card>
+    </div>
+  </main>
+</div>
