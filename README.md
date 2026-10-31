@@ -81,11 +81,9 @@ O protótipo combina front-end em **Angular** e back-end em **Java (Spring Boot)
 ## 2. Demonstração
 
 <p align="center">
-  <a href="frontend/midia/demonstracao.mp4">
-    <img src="frontend/midia/demonstracao-preview.gif" alt="Prévia animada da demonstração do RevisaLab. Clique para assistir ao vídeo completo." width="720">
-  </a>
-  <br>
-  <strong>▶️ CLIQUE NO GIF ACIMA PARA ASSISTIR À DEMONSTRAÇÃO COMPLETA</strong>
+  <video src="frontend/midia/demonstracao.mp4" controls autoplay muted playsinline width="720">
+    Seu navegador não oferece suporte à reprodução de vídeo.
+  </video>
 </p>
 
 ---
