@@ -1,4 +1,4 @@
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:1a2980,100:26d0ce&height=160&section=header&text=RevisaLab&fontSize=50&fontColor=ffffff"/>
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:0F1A5C,50:1A2980,100:26D0CE&height=200&section=header&text=RevisaLab&fontSize=54&fontColor=ffffff&fontAlignY=35&desc=Revis%C3%A3o%20gamificada%20para%20fortalecer%20a%20base%20acad%C3%AAmica&descSize=18&descAlignY=58&animation=fadeIn"/>
 
 <div align="center">
 
@@ -63,9 +63,6 @@
    - [6.2 Banco de dados](#62-banco-de-dados)
    - [6.3 Segurança](#63-segurança)
 7. [Validação](#7-validação)
-8. [Limitações e trabalhos futuros](#8-limitações-e-trabalhos-futuros)
-9. [Repositório GitHub](#9-repositório-github)
-
 [Licença](#licença)
 
 ---
@@ -74,16 +71,18 @@
 
 O **RevisaLab** é uma plataforma web gamificada que apoia a **revisão estruturada de conteúdos do ensino médio**, atuando como complemento à formação do graduando. Ela organiza recursos educacionais em **trilhas de aprendizagem** e integra mecânicas de jogo — pontos (**XP**), níveis, conquistas, ranking, missões e feedback imediato — para ampliar o engajamento, a autonomia e o acompanhamento contínuo do progresso do estudante.
 
-O protótipo combina front-end em **Angular** e back-end em **Java (Spring Boot)**, cobrindo os requisitos funcionais detalhados na seção [4. Funcionalidades](#4-funcionalidades).
+O protótipo combina front-end em **Angular** e back-end em **Java (Spring Boot)**, cobrindo os requisitos funcionais da plataforma.
 
 ---
 
 ## 2. Demonstração
 
 <p align="center">
-  <video src="frontend/midia/demonstracao.mp4" controls autoplay muted playsinline width="720">
-    Seu navegador não oferece suporte à reprodução de vídeo.
-  </video>
+  <img src="frontend/midia/demonstracao-preview.gif" alt="Prévia animada de 30 segundos da demonstração do RevisaLab." width="720">
+  <br>
+  <strong>▶️ PRÉVIA ANIMADA — 30 SEGUNDOS</strong>
+  <br>
+  <strong><a href="https://github.com/Evanyhelen/revisalab/raw/refs/heads/main/frontend/midia/demonstracao.mp4">➡️ BAIXAR A DEMONSTRAÇÃO COMPLETA (MP4)</a></strong>
 </p>
 
 ---
@@ -236,7 +235,7 @@ A aplicação é disponibilizada em `http://localhost:4200`.
 
 | Variável | Obrigatória | Descrição | Padrão |
 |----------|:-----------:|-----------|--------|
-| `GROQ_API_KEY` | Não | Chave da API Groq (valor padrão já configurado no `application.yml`) | — |
+| `GROQ_API_KEY` | Para usar o chat IA | Configure uma chave própria da API Groq no ambiente. A chave do projeto não é incluída no repositório por segurança. | — |
 | `FRONTEND_URL` | Não | Origem permitida no CORS | `http://localhost:4200` |
 | `PASSWORD_RESET_DEV_CAPTURE_FILE` | Não | Arquivo de captura dos links de redefinição em desenvolvimento | `data/password-reset-links.log` |
 
@@ -294,7 +293,7 @@ O console H2 permanece habilitado em `/h2-console`. Em produção, o esquema é 
 - Senhas criptografadas com BCrypt.
 - Controle de acesso baseado em perfis (`ROLE_USER`, `ROLE_ADMIN`) via `@PreAuthorize`.
 - CORS restrito à origem do frontend.
-- Configurações sensíveis gerenciadas por variável de ambiente, com valores padrão em `application.yml`; ver [5.4 Variáveis de ambiente](#54-variáveis-de-ambiente).
+- Configurações sensíveis gerenciadas por variáveis de ambiente; ver [5.4 Variáveis de ambiente](#54-variáveis-de-ambiente).
 
 ---
 
@@ -310,24 +309,8 @@ A plataforma foi verificada de ponta a ponta — e não apenas por compilação:
 
 ---
 
-## 8. Limitações e trabalhos futuros
-
-- Ausência de avaliação empírica com estudantes reais (prevista como etapa futura).
-- Ausência de mecanismos de adaptação automática da dificuldade dos exercícios.
-- Conteúdo restrito a materiais cadastrados manualmente.
-
----
-
-## 9. Repositório GitHub
-
-<!-- REPOSITÓRIO: substitua pelo link público do repositório no GitHub. -->
-Repositório: _link a ser adicionado após publicação no GitHub._
-<!-- FIM DO REPOSITÓRIO -->
-
----
-
 ## Licença
 
 Projeto desenvolvido como parte de um **Trabalho de Conclusão de Curso (TCC)** e disponibilizado para **fins educacionais**.
 
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:1a2980,100:26d0ce&height=120&section=footer"/>
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:26D0CE,50:1A2980,100:0F1A5C&height=120&section=footer"/>
