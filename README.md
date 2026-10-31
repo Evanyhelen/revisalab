@@ -56,8 +56,7 @@
    - [5.2 Backend (API)](#52-backend-api)
    - [5.3 Frontend (SPA)](#53-frontend-spa)
    - [5.4 Variáveis de ambiente](#54-variáveis-de-ambiente)
-   - [5.5 Credenciais de teste](#55-credenciais-de-teste)
-   - [5.6 Rotas da aplicação](#56-rotas-da-aplicação)
+   - [5.5 Rotas da aplicação](#55-rotas-da-aplicação)
 6. [Aspectos técnicos](#6-aspectos-técnicos)
    - [6.1 Integrações externas](#61-integrações-externas)
    - [6.2 Banco de dados](#62-banco-de-dados)
@@ -160,8 +159,7 @@ RevisaLab/
 │       └── services/        # Integração com a API
 │   ├── imagens/           # Diagramas do projeto (Figuras 1 e 2)
 │   └── midia/             # Vídeo de demonstração e prévia animada
-├── proposta.txt          # Documento da proposta (TCC)
-└── README.md             # Este arquivo
+└── README.md              # Este arquivo
 ```
 
 ---
@@ -208,7 +206,7 @@ A tabela consolida as funcionalidades implementadas e o atendimento aos requisit
 
 - Java 21 (JDK)
 - Maven 3.9+
-- Node.js 18+ e npm
+- Node.js 20.19+ e npm
 
 ### 5.2 Backend (API)
 
@@ -239,13 +237,7 @@ A aplicação é disponibilizada em `http://localhost:4200`.
 | `FRONTEND_URL` | Não | Origem permitida no CORS | `http://localhost:4200` |
 | `PASSWORD_RESET_DEV_CAPTURE_FILE` | Não | Arquivo de captura dos links de redefinição em desenvolvimento | `data/password-reset-links.log` |
 
-### 5.5 Credenciais de teste
-
-| Perfil | E-mail | Senha |
-|--------|--------|-------|
-| Estudante | `teste@revisalab.com` | `teste123` |
-
-### 5.6 Rotas da aplicação
+### 5.5 Rotas da aplicação
 
 | Rota | Módulo | Acesso |
 |------|--------|:------:|
@@ -272,7 +264,7 @@ A aplicação é disponibilizada em `http://localhost:4200`.
 
 | Serviço | Uso | Observações |
 |---------|-----|-------------|
-| Groq | Chat IA | Compatível com OpenAI; chave já configurada no `application.yml` |
+| Groq | Chat IA | Compatível com OpenAI; a chave é fornecida pela variável de ambiente `GROQ_API_KEY`. |
 | ENEM API (`api.enem.dev`) | Exercícios do ENEM | Limite de aproximadamente 1 requisição/s |
 | Wikipedia | Conteúdo complementar | REST API |
 | YouTube | Recursos em vídeo | oEmbed e busca |
