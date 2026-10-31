@@ -62,7 +62,7 @@
    - [6.2 Banco de dados](#62-banco-de-dados)
    - [6.3 Segurança](#63-segurança)
 7. [Validação](#7-validação)
-[Licença](#licença)
+8. [Licença](#licença)
 
 ---
 
