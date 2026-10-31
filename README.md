@@ -1,11 +1,3 @@
-<!-- ============================================================================
-     VÍDEO DE DEMONSTRAÇÃO
-     O vídeo de demonstração (interação com a plataforma) será salvo em
-     frontend/imagens/. Ao receber o arquivo, adicione-o nessa pasta e ajuste
-     o link da seção "2. Demonstração".
-============================================================================ -->
-
-
 <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:1a2980,100:26d0ce&height=160&section=header&text=RevisaLab&fontSize=50&fontColor=ffffff"/>
 
 <div align="center">
@@ -82,15 +74,19 @@
 
 O **RevisaLab** é uma plataforma web gamificada que apoia a **revisão estruturada de conteúdos do ensino médio**, atuando como complemento à formação do graduando. Ela organiza recursos educacionais em **trilhas de aprendizagem** e integra mecânicas de jogo — pontos (**XP**), níveis, conquistas, ranking, missões e feedback imediato — para ampliar o engajamento, a autonomia e o acompanhamento contínuo do progresso do estudante.
 
-O protótipo combina front-end em **Angular** e back-end em **Java (Spring Boot)**, cobrindo os requisitos funcionais e não funcionais detalhados na seção [4. Funcionalidades](#4-funcionalidades).
+O protótipo combina front-end em **Angular** e back-end em **Java (Spring Boot)**, cobrindo os requisitos funcionais detalhados na seção [4. Funcionalidades](#4-funcionalidades).
 
 ---
 
 ## 2. Demonstração
 
-<!-- VÍDEO: salve o arquivo em frontend/imagens/ e troque "demonstracao.mp4" no link abaixo. -->
-<p align="center"><a href="frontend/imagens/demonstracao.mp4"><img src="https://api.iconify.design/mdi/play-circle.svg?color=%231a2980&width=20" width="20" style="vertical-align:-4px" alt=""> Assistir à demonstração do RevisaLab</a> — <em>vídeo a ser adicionado.</em></p>
-<!-- FIM DO VÍDEO -->
+<p align="center">
+  <a href="frontend/midia/demonstracao.mp4">
+    <img src="frontend/midia/demonstracao-preview.gif" alt="Prévia animada da demonstração do RevisaLab. Clique para assistir ao vídeo completo." width="720">
+  </a>
+  <br>
+  <strong>▶️ CLIQUE NO GIF ACIMA PARA ASSISTIR À DEMONSTRAÇÃO COMPLETA</strong>
+</p>
 
 ---
 
@@ -165,7 +161,8 @@ RevisaLab/
 │       ├── home/            # Landing page
 │       ├── sobre/ · fundamentacao/ · impacto/   # Páginas públicas
 │       └── services/        # Integração com a API
-│   └── imagens/           # Diagramas e imagens do projeto (Figuras 1 e 2)
+│   ├── imagens/           # Diagramas do projeto (Figuras 1 e 2)
+│   └── midia/             # Vídeo de demonstração e prévia animada
 ├── proposta.txt          # Documento da proposta (TCC)
 └── README.md             # Este arquivo
 ```
